@@ -32,5 +32,5 @@ configure_make_makeinstall
 unset MAKEFLAGS   # compile this single-threaded only, breaks otherwise
 
 get_source $URL_PYTHON
-configure_make_makeinstall --enable-framework=$OPT_DIR/Frameworks
+configure_make_makeinstall --enable-framework=$OPT_DIR/Frameworks --enable-optimizations
 
