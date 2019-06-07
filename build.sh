@@ -9,6 +9,12 @@ TMP_DIR=$OPT_DIR/tmp
 LIB_DIR=$OPT_DIR/lib
 INC_DIR=$OPT_DIR/include
 
+export CFLAGS=-I$INC_DIR
+export CXXFLAGS=-I$INC_DIR
+export LDFLAGS=-L$LIB_DIR
+export MAKEFLAGS=-j$(sysctl -n hw.ncpu)
+
+export MACOSX_DEPLOYMENT_TARGET=10.12
 
 # version numbers have been set according to current Inkscape build pipeline
 URL_PYTHON=https://www.python.org/ftp/python/3.6.4/Python-3.6.4.tar.xz
@@ -16,7 +22,6 @@ URL_OPENSSL=https://www.openssl.org/source/openssl-1.1.0g.tar.gz
 URL_READLINE=ftp://ftp.cwru.edu/pub/bash/readline-7.0.tar.gz
 URL_GETTEXT=https://ftp.gnu.org/pub/gnu/gettext/gettext-0.19.8.tar.gz
 URL_XZUTILS=https://tukaani.org/xz/xz-5.2.4.tar.xz
-
 
 ### FUNCTIONS ##################################################################
 
@@ -98,11 +103,6 @@ function reset_dylib_name
 ### MAIN #######################################################################
 
 #set -e
-
-export CFLAGS=-I$INC_DIR
-export CXXFLAGS=-I$INC_DIR
-export LDFLAGS=-L$LIB_DIR
-export MAKEFLAGS=-j$(sysctl -n hw.ncpu)
 
 get_source $URL_OPENSSL
 config_make_makeinstall
