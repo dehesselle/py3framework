@@ -29,8 +29,6 @@ configure_make_makeinstall
 
 ### install Python #############################################################
 
-unset MAKEFLAGS   # compile this single-threaded only, breaks otherwise
-
 get_source $URL_PYTHON
 configure_make_makeinstall --enable-framework=$OPT_DIR/Frameworks --enable-optimizations
 
