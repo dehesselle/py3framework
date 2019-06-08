@@ -7,6 +7,10 @@
 SELF_DIR=$(cd $(dirname "$0"); pwd -P)
 for script in $SELF_DIR/0??-*.sh; do source $script; done
 
+### halt on errors #############################################################
+
+set -e
+
 ### install OpenSSL ############################################################
 
 get_source $URL_OPENSSL

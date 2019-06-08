@@ -15,11 +15,11 @@ INC_DIR=$OPT_DIR/include
 ### Framework directories ######################################################
 
 FRA_DIR=$OPT_DIR/Frameworks/Python.framework
-FRA_EXT_LIB_DIR=$FRA_DIR/Versions/3.6/Libraries
-FRA_RES_DIR=$FRA_DIR/Versions/3.6/Resources
-FRA_BIN_DIR=$FRA_DIR/Versions/3.6/bin
-FRA_LIB_DIR=$FRA_DIR/Versions/3.6/lib
-FRA_PY3_LIB=$FRA_DIR/Versions/3.6/Python
+FRA_EXT_LIB_DIR=$FRA_DIR/Versions/3.7/Libraries
+FRA_RES_DIR=$FRA_DIR/Versions/3.7/Resources
+FRA_BIN_DIR=$FRA_DIR/Versions/3.7/bin
+FRA_LIB_DIR=$FRA_DIR/Versions/3.7/lib
+FRA_PY3_LIB=$FRA_DIR/Versions/3.7/Python
 
 ### compiler settings ##########################################################
 
@@ -36,10 +36,9 @@ export MACOSX_DEPLOYMENT_TARGET=10.12   # macOS Sierra required
 
 ### download URLs ##############################################################
 
-# version numbers have been set according to current Inkscape build pipeline
-URL_PYTHON=https://www.python.org/ftp/python/3.6.4/Python-3.6.4.tar.xz
-URL_OPENSSL=https://www.openssl.org/source/openssl-1.1.0g.tar.gz
-URL_READLINE=ftp://ftp.cwru.edu/pub/bash/readline-7.0.tar.gz
-URL_GETTEXT=https://ftp.gnu.org/pub/gnu/gettext/gettext-0.19.8.tar.gz
+URL_PYTHON=https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tar.xz
+URL_OPENSSL=https://www.openssl.org/source/openssl-1.1.0k.tar.gz
+URL_READLINE=ftp://ftp.cwru.edu/pub/bash/readline-8.0.tar.gz
+URL_GETTEXT=https://ftp.gnu.org/pub/gnu/gettext/gettext-0.20.1.tar.gz
 URL_XZUTILS=https://tukaani.org/xz/xz-5.2.4.tar.xz
 
