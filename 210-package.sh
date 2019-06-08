@@ -10,7 +10,8 @@ for script in $SELF_DIR/0??-*.sh; do source $script; done
 ### create 'Libraries' symlink inside Framework bundle #########################
 
 mkdir -p $FRA_EXT_LIB_DIR
-ln -s $FRA_EXT_LIB_DIR $FRA_DIR
+cd $FRA_DIR
+ln -sf Versions/Current/Libraries
 
 ### add gettext ################################################################
 
