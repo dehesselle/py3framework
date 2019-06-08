@@ -14,10 +14,10 @@ ln -s $FRA_EXT_LIB_DIR $FRA_DIR
 
 ### add gettext ################################################################
 
-cp $LIB_DIR/libintl.9.dylib $FRA_EXT_LIB_DIR
-reset_dylib_name $FRA_EXT_LIB_DIR/libintl.9.dylib
+cp $LIB_DIR/libintl.8.dylib $FRA_EXT_LIB_DIR
+reset_dylib_name $FRA_EXT_LIB_DIR/libintl.8.dylib
 chmod 755 $FRA_PY3_LIB
-install_name_tool -change $LIB_DIR/libintl.9.dylib @loader_path/Libraries/libintl.9.dylib $FRA_PY3_LIB
+install_name_tool -change $LIB_DIR/libintl.8.dylib @loader_path/Libraries/libintl.8.dylib $FRA_PY3_LIB
 chmod 555 $FRA_PY3_LIB
 
 ### add Readline ###############################################################
@@ -54,7 +54,7 @@ install_name_tool -change $LIB_DIR/liblzma.5.dylib @loader_path/../../../Librari
 install_name_tool -change $FRA_PY3_LIB @executable_path/../Python $FRA_BIN_DIR/python3.7
 install_name_tool -change $FRA_PY3_LIB @executable_path/../Python $FRA_BIN_DIR/python3.7m
 install_name_tool -change $FRA_PY3_LIB @executable_path/../../../../Python $FRA_RES_DIR/Python.app/Contents/MacOS/Python
-install_name_tool -change $LIB_DIR/libintl.9.dylib @executable_path/../../../../Libraries/libintl.9.dylib $FRA_RES_DIR/Python.app/Contents/MacOS/Python
+install_name_tool -change $LIB_DIR/libintl.8.dylib @executable_path/../../../../Libraries/libintl.8.dylib $FRA_RES_DIR/Python.app/Contents/MacOS/Python
 
 ### use environment lookup for interpreter path ################################
 
