@@ -30,10 +30,14 @@ export LDFLAGS=-L$LIB_DIR
 # at leaset Python and OpenSSL have problems with mutli-core compilation
 # export MAKEFLAGS=-j$(sysctl -n hw.ncpu)  # use all available cores
 
-
-# I'm not using on old SDK so it's not safe to go lower than 10.12.
+# using 10.13 SDK it's not safe to go lower than 10.12.
 # https://smallhacks.wordpress.com/2018/11/11/how-to-support-old-osx-version-with-a-recent-xcode/
-export MACOSX_DEPLOYMENT_TARGET=10.12   # macOS Sierra required
+export MACOSX_DEPLOYMENT_TARGET=10.12   # at least macOS Sierra required
+
+# help autotools with 10.13 SDK on 10.12
+# https://github.com/Homebrew/brew/pull/3182/commits/733d485065e55ad1cf159eec89927c4990bbdfaf
+export ac_cv_func_futimens=no
+export ac_cv_func_utimensat=no
 
 ### download URLs ##############################################################
 
