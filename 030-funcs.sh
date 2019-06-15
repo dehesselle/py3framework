@@ -19,14 +19,6 @@ function configure_make_makeinstall
   make_makeinstall
 }
 
-function config_make_makeinstall
-{
-  local flags="$*"
-
-  ./config --prefix=$OPT_DIR $flags
-  make_makeinstall
-}
-
 ### determine compressor flag by file extension ################################
 
 function get_compressor_flag

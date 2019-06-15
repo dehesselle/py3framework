@@ -8,10 +8,13 @@
 # If this file is present, it overrides some settings from 020-vars.sh to 
 # compile against 10.9 SDK instead of 10.13 SDK.
 
+FLAG_ISYSROOT="-isysroot /Developer/SDKs/MacOSX10.9.sdk"
+FLAG_MMACOSXVERSIONMIN="-mmacosx-version-min=10.9"
+
 # add flags to use 10.9 SDK
-export CFLAGS="$CFLAGS -mmacosx-version-min=10.9 -isysroot /Developer/SDKs/MacOSX10.9.sdk"
-export CXXFLAGS="$CXXFLAGS -mmacosx-version-min=10.9 -isysroot /Developer/SDKs/MacOSX10.9.sdk"
-export LDFLAGS="$LDFLAGS -mmacosx-version-min=10.9 -isysroot /Developer/SDKs/MacOSX10.9.sdk"
+export CFLAGS="$CFLAGS $FLAG_MMACOSXVERSIONMIN $FLAG_ISYSROOT"
+export CXXFLAGS="$CXXFLAGS $FLAG_MMACOSXVERSIONMIN $FLAG_ISYSROOT"
+export LDFLAGS="$LDFLAGS $FLAG_MMACOSXVERSIONMIN $FLAG_ISYSROOT"
 
 # re-set the deployment target accordingly
 export MACOSX_DEPLOYMENT_TARGET=10.9

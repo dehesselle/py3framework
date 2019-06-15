@@ -14,7 +14,10 @@ set -e
 ### install OpenSSL ############################################################
 
 get_source $URL_OPENSSL
-config_make_makeinstall
+
+# OpenSSL needs special treatment to configure correctly for an alternate SDK.
+CC="clang $FLAG_ISYSROOT" ./config --prefix=$OPT_DIR $FLAG_MMACOSXVERSIONMIN
+make_makeinstall
 
 ### install readline ###########################################################
 
