@@ -41,3 +41,4 @@ URL_OPENSSL=https://www.openssl.org/source/openssl-1.1.0k.tar.gz
 URL_PYTHON=https://www.python.org/ftp/python/3.6.8/Python-3.6.8.tar.xz
 URL_READLINE=ftp://ftp.cwru.edu/pub/bash/readline-8.0.tar.gz
 URL_XZUTILS=https://tukaani.org/xz/xz-5.2.4.tar.xz
+URL_ZLIB=https://zlib.net/zlib-1.2.11.tar.gz

@@ -11,6 +11,11 @@ for script in $SELF_DIR/0??-*.sh; do source $script; done
 
 set -e
 
+### install zlib ###############################################################
+
+get_source $URL_ZLIB
+configure_make_makeinstall
+
 ### install OpenSSL ############################################################
 
 get_source $URL_OPENSSL

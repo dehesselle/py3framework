@@ -50,6 +50,13 @@ chmod 644 $FRA_EXT_LIB_DIR/liblzma.5.dylib
 reset_dylib_name $FRA_EXT_LIB_DIR/liblzma.5.dylib
 install_name_tool -change $LIB_DIR/liblzma.5.dylib @loader_path/../../../Libraries/liblzma.5.dylib $FRA_LIB_DIR/python3.6/lib-dynload/_lzma.cpython-36m-darwin.so
 
+### add zlib ###################################################################
+
+cp $LIB_DIR/libz.1.2.11.dylib $FRA_EXT_LIB_DIR
+reset_dylib_name $FRA_EXT_LIB_DIR/libz.1.2.11.dylib
+install_name_tool -change $LIB_DIR/libz.1.dylib @loader_path/../../../Libraries/libz.1.2.11.dylib $FRA_LIB_DIR/python3.6/lib-dynload/zlib.cpython-36m-darwin.so
+install_name_tool -change $LIB_DIR/libz.1.dylib @loader_path/../../../Libraries/libz.1.2.11.dylib $FRA_LIB_DIR/python3.6/lib-dynload/binascii.cpython-36m-darwin.so
+
 ### make library link paths relative ###########################################
 
 install_name_tool -change $FRA_PY3_LIB @executable_path/../Python $FRA_BIN_DIR/python3.6
