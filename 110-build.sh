@@ -16,7 +16,8 @@ set -e
 get_source $URL_OPENSSL
 
 # OpenSSL needs special treatment to configure correctly for an alternate SDK.
-CC="clang $FLAG_ISYSROOT" ./config --prefix=$OPT_DIR $FLAG_MMACOSXVERSIONMIN
+./config --prefix=$OPT_DIR -mmacosx-version-min=$MACOSX_DEPLOYMENT_TARGET
+
 make_makeinstall
 
 ### install readline ###########################################################
