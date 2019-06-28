@@ -23,7 +23,10 @@ get_source $URL_OPENSSL
 # OpenSSL needs special treatment to configure correctly for an alternate SDK.
 ./config --prefix=$OPT_DIR -mmacosx-version-min=$MACOSX_DEPLOYMENT_TARGET
 
-make_makeinstall
+(
+  unset MAKEFLAGS    # revoke multi-core compilation
+  make_makeinstall
+)
 
 ### install readline ###########################################################
 
@@ -43,5 +46,9 @@ configure_make_makeinstall
 ### install Python #############################################################
 
 get_source $URL_PYTHON
-configure_make_makeinstall --enable-framework=$OPT_DIR/Frameworks --enable-optimizations
 
+(
+  unset MAKEFLAGS    # revoke multi-core compilation
+  export CFLAGS="$CFLAGS -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$MACOSX_DEPLOYMENT_TARGET.sdk/System/Library/Frameworks/Tk.framework/Versions/Current/Headers"
+  configure_make_makeinstall --enable-framework=$OPT_DIR/Frameworks --enable-optimizations
+)

@@ -27,8 +27,8 @@ export CFLAGS=-I$INC_DIR
 export CXXFLAGS=-I$INC_DIR
 export LDFLAGS=-L$LIB_DIR
 
-# at leaset Python and OpenSSL have problems with mutli-core compilation
-# export MAKEFLAGS=-j$(sysctl -n hw.ncpu)  # use all available cores
+# FYI: Python and OpenSSL have problems with mutli-core compilation
+export MAKEFLAGS=-j$(sysctl -n hw.ncpu)  # use all available cores
 
 export MACOSX_DEPLOYMENT_TARGET=10.11   # OS X El Capitan
 
