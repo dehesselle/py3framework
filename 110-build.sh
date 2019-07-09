@@ -44,7 +44,7 @@ configure_make_makeinstall --without-emacs --disable-java --disable-native-java 
 get_source $URL_XZUTILS
 configure_make_makeinstall
 
-### install Python #############################################################
+### build Python ###############################################################
 
 get_source $URL_PYTHON
 
@@ -53,3 +53,16 @@ get_source $URL_PYTHON
   export CFLAGS="$CFLAGS -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$MACOSX_DEPLOYMENT_TARGET.sdk/System/Library/Frameworks/Tk.framework/Versions/Current/Headers"
   configure_make_makeinstall --enable-framework=$OPT_DIR/Frameworks --enable-optimizations
 )
+
+### remove stack_size linker flag ##############################################
+
+# according to this
+# https://gitlab.gnome.org/GNOME/gtk-osx/blob/5131320175b7048d48930bfa0e6173101747fcc2/README.md
+# we need to replace
+#   LINKFORSHARED: -Wl,stack_size,1000000 -framework CoreFoundation
+# with
+#   LINKFORSHARED: -framework CoreFoundation
+# effectively remove the stack_size parameter
+
+sed -i "" "s/-Wl,-stack_size,1000000/ /" $FRA_LIB_DIR/python3.6/_sysconfigdata_m_darwin_darwin.py
+
