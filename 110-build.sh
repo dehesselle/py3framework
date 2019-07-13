@@ -12,6 +12,11 @@ for script in $SELF_DIR/0??-*.sh; do source $script; done
 
 set -e
 
+### install iconv ##############################################################
+
+get_source $URL_ICONV
+configure_make_makeinstall
+
 ### install zlib ###############################################################
 
 get_source $URL_ZLIB
@@ -62,7 +67,11 @@ get_source $URL_PYTHON
 #   LINKFORSHARED: -Wl,stack_size,1000000 -framework CoreFoundation
 # with
 #   LINKFORSHARED: -framework CoreFoundation
-# effectively remove the stack_size parameter
+# effectively removing the stack_size parameter
 
 sed -i "" "s/-Wl,-stack_size,1000000/ /" $FRA_LIB_DIR/python3.6/_sysconfigdata_m_darwin_darwin.py
 
+### install Libxml2 ############################################################
+
+get_source $URL_LIBXML2
+configure_make_makeinstall --with-python=$FRA_BIN_DIR/python3
