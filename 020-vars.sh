@@ -11,15 +11,16 @@ SRC_DIR=$OPT_DIR/src
 TMP_DIR=$OPT_DIR/tmp
 LIB_DIR=$OPT_DIR/lib
 INC_DIR=$OPT_DIR/include
+FRA_DIR=$OPT_DIR/Frameworks
 
 ### Framework directories ######################################################
 
-FRA_DIR=$OPT_DIR/Frameworks/Python.framework
-FRA_EXT_LIB_DIR=$FRA_DIR/Versions/3.6/Libraries
-FRA_RES_DIR=$FRA_DIR/Versions/3.6/Resources
-FRA_BIN_DIR=$FRA_DIR/Versions/3.6/bin
-FRA_LIB_DIR=$FRA_DIR/Versions/3.6/lib
-FRA_PY3_LIB=$FRA_DIR/Versions/3.6/Python
+PY3_FRA_DIR=$FRA_DIR/Python.framework
+PY3_FRA_EXT_LIB_DIR=$PY3_FRA_DIR/Versions/3.6/Libraries
+PY3_FRA_RES_DIR=$PY3_FRA_DIR/Versions/3.6/Resources
+PY3_FRA_BIN_DIR=$PY3_FRA_DIR/Versions/3.6/bin
+PY3_FRA_LIB_DIR=$PY3_FRA_DIR/Versions/3.6/lib
+PY3_FRA_LIB=$PY3_FRA_DIR/Versions/3.6/Python
 
 ### compiler settings ##########################################################
 

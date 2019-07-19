@@ -56,7 +56,7 @@ get_source $URL_PYTHON
 (
   unset MAKEFLAGS    # revoke multi-core compilation
   export CFLAGS="$CFLAGS -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$MACOSX_DEPLOYMENT_TARGET.sdk/System/Library/Frameworks/Tk.framework/Versions/Current/Headers"
-  configure_make_makeinstall --enable-framework=$OPT_DIR/Frameworks --enable-optimizations
+  configure_make_makeinstall --enable-framework=$FRA_DIR --enable-optimizations
 )
 
 ### remove stack_size linker flag ##############################################
@@ -69,9 +69,9 @@ get_source $URL_PYTHON
 #   LINKFORSHARED: -framework CoreFoundation
 # effectively removing the stack_size parameter
 
-sed -i "" "s/-Wl,-stack_size,1000000/ /" $FRA_LIB_DIR/python3.6/_sysconfigdata_m_darwin_darwin.py
+sed -i "" "s/-Wl,-stack_size,1000000/ /" $PY3_FRA_LIB_DIR/python3.6/_sysconfigdata_m_darwin_darwin.py
 
 ### install Libxml2 ############################################################
 
 get_source $URL_LIBXML2
-configure_make_makeinstall --with-python=$FRA_BIN_DIR/python3
+configure_make_makeinstall --with-python=$PY3_FRA_BIN_DIR/python3
