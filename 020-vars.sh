@@ -48,7 +48,7 @@ export MACOSX_DEPLOYMENT_TARGET=10.11   # OS X El Capitan
 
 URL_GETTEXT=https://ftp.halifax.rwth-aachen.de/gnu/gettext/gettext-0.20.1.tar.xz
 URL_ICONV=https://ftp.halifax.rwth-aachen.de/gnu/libiconv/libiconv-1.16.tar.gz
-URL_OPENSSL=https://www.openssl.org/source/openssl-1.1.0k.tar.gz
+URL_OPENSSL=https://www.openssl.org/source/openssl-1.1.1c.tar.gz
 URL_PYTHON=https://www.python.org/ftp/python/$PY3_MAJOR.$PY3_MINOR.$PY3_PATCH/Python-$PY3_MAJOR.$PY3_MINOR.$PY3_PATCH.tar.xz
 URL_READLINE=https://ftp.halifax.rwth-aachen.de/gnu/readline/readline-8.0.tar.gz
 URL_LIBXML2=ftp://xmlsoft.org/libxml2/libxml2-2.9.9.tar.gz
