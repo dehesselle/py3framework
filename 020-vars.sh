@@ -40,7 +40,7 @@ export LDFLAGS=-L$LIB_DIR
 # FYI: Python and OpenSSL have problems with mutli-core compilation
 export MAKEFLAGS=-j$(sysctl -n hw.ncpu)  # use all available cores
 
-export MACOSX_DEPLOYMENT_TARGET=10.11   # OS X El Capitan
+export MACOSX_DEPLOYMENT_TARGET=10.12   # macOS Sierra
 
 ### download URLs ##############################################################
 
