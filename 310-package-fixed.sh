@@ -81,9 +81,7 @@ reset_dylib_name $PY3_FRA_EXT_LIB_DIR/libxml2.2.dylib
 relocate_dependency $PY3_FRA_EXT_LIB_DIR/libxml2.2.dylib $PY3_FRA_LIB_DIR/python$PY3_MAJOR.$PY3_MINOR/site-packages/libxml2mod.so
 relocate_dependency $PY3_FRA_EXT_LIB_DIR/libz.1.dylib $PY3_FRA_LIB_DIR/python$PY3_MAJOR.$PY3_MINOR/site-packages/libxml2mod.so
 relocate_dependency $PY3_FRA_EXT_LIB_DIR/liblzma.5.dylib $PY3_FRA_LIB_DIR/python$PY3_MAJOR.$PY3_MINOR/site-packages/libxml2mod.so
-relocate_dependency $PY3_FRA_EXT_LIB_DIR/libintl.8.dylib $PY3_FRA_LIB_DIR/python$PY3_MAJOR.$PY3_MINOR/site-packages/libxml2mod.so
 relocate_dependency $PY3_FRA_EXT_LIB_DIR/libiconv.2.dylib $PY3_FRA_LIB_DIR/python$PY3_MAJOR.$PY3_MINOR/site-packages/libxml2mod.so
-relocate_dependency $PY3_FRA_LIB $PY3_FRA_LIB_DIR/python$PY3_MAJOR.$PY3_MINOR/site-packages/libxml2mod.so
 
 relocate_dependency $PY3_FRA_EXT_LIB_DIR/libz.1.dylib $PY3_FRA_EXT_LIB_DIR/libxml2.2.dylib
 relocate_dependency $PY3_FRA_EXT_LIB_DIR/liblzma.5.dylib $PY3_FRA_EXT_LIB_DIR/libxml2.2.dylib
