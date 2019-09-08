@@ -8,17 +8,18 @@ Although you can download an official Python 3 framework build from https://www.
 
 ### Prerequisites
 
-These scripts have been written and designed for macOS 10.11.6 and expect to find Xcode 8.2.1 as well as the 10.11 SDK (e.g. installed via [XcodeLegacy](https://github.com/devernay/xcodelegacy)) on your system.
+I am using Xcode 10.3 with the 10.9 SDK to build this. Other combinations and build targets may work (I've built on El Capitan for a while myself) as well, YMMV.
+You can get older SDKs from older versions of Xcode (check the downloads section in your Apple Developer account) or use little helpers like [XcodeLegacy](https://github.com/devernay/xcodelegacy).
 
 ### Instructions
 
 - Adjust the build directory in `020-vars.sh` to your liking:
 
   ```bash
-  WRK_DIR=/work
+  WRK_DIR=/Users/Shared/work
   ```
 
-- Run the scripts to build and package `Python.framework`. 
+- Run the scripts to build and package `Python.framework`.
   
   ```bash
   ./110-build.sh      # download and compile everything
