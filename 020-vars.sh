@@ -13,14 +13,23 @@ LIB_DIR=$OPT_DIR/lib
 INC_DIR=$OPT_DIR/include
 FRA_DIR=$OPT_DIR/Frameworks
 
-### Framework directories ######################################################
+### Python version #############################################################
+
+# Set the Python version here. All directories and filenames will adapt 
+# accordingly using these variables.
+
+PY3_MAJOR=3
+PY3_MINOR=6
+PY3_PATCH=9
+
+### Python.framework directories ###############################################
 
 PY3_FRA_DIR=$FRA_DIR/Python.framework
-PY3_FRA_EXT_LIB_DIR=$PY3_FRA_DIR/Versions/3.6/Libraries
-PY3_FRA_RES_DIR=$PY3_FRA_DIR/Versions/3.6/Resources
-PY3_FRA_BIN_DIR=$PY3_FRA_DIR/Versions/3.6/bin
-PY3_FRA_LIB_DIR=$PY3_FRA_DIR/Versions/3.6/lib
-PY3_FRA_LIB=$PY3_FRA_DIR/Versions/3.6/Python
+PY3_FRA_EXT_LIB_DIR=$PY3_FRA_DIR/Versions/$PY3_MAJOR.$PY3_MINOR/Libraries
+PY3_FRA_RES_DIR=$PY3_FRA_DIR/Versions/$PY3_MAJOR.$PY3_MINOR/Resources
+PY3_FRA_BIN_DIR=$PY3_FRA_DIR/Versions/$PY3_MAJOR.$PY3_MINOR/bin
+PY3_FRA_LIB_DIR=$PY3_FRA_DIR/Versions/$PY3_MAJOR.$PY3_MINOR/lib
+PY3_FRA_LIB=$PY3_FRA_DIR/Versions/$PY3_MAJOR.$PY3_MINOR/Python
 
 ### compiler settings ##########################################################
 
@@ -35,13 +44,13 @@ export MACOSX_DEPLOYMENT_TARGET=10.11   # OS X El Capitan
 
 ### download URLs ##############################################################
 
-# latest Python 3.6.x and latest "everything else"
+# Python $PY3_MAJOR.$PY3_MINOR.$PY3_PATCH and latest "everything else"
 
-URL_GETTEXT=https://ftp.gnu.org/pub/gnu/gettext/gettext-0.20.1.tar.gz
-URL_ICONV=https://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.16.tar.gz
-URL_OPENSSL=https://www.openssl.org/source/openssl-1.1.0k.tar.gz
-URL_PYTHON=https://www.python.org/ftp/python/3.6.9/Python-3.6.9.tar.xz
-URL_READLINE=ftp://ftp.gnu.org/gnu/readline/readline-8.0.tar.gz
+URL_GETTEXT=https://ftp.halifax.rwth-aachen.de/gnu/gettext/gettext-0.20.1.tar.xz
+URL_ICONV=https://ftp.halifax.rwth-aachen.de/gnu/libiconv/libiconv-1.16.tar.gz
+URL_OPENSSL=https://www.openssl.org/source/openssl-1.1.1c.tar.gz
+URL_PYTHON=https://www.python.org/ftp/python/$PY3_MAJOR.$PY3_MINOR.$PY3_PATCH/Python-$PY3_MAJOR.$PY3_MINOR.$PY3_PATCH.tar.xz
+URL_READLINE=https://ftp.halifax.rwth-aachen.de/gnu/readline/readline-8.0.tar.gz
 URL_LIBXML2=ftp://xmlsoft.org/libxml2/libxml2-2.9.9.tar.gz
 URL_XZUTILS=https://tukaani.org/xz/xz-5.2.4.tar.xz
 URL_ZLIB=https://zlib.net/zlib-1.2.11.tar.gz
