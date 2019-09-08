@@ -5,7 +5,7 @@
 
 ### build directories ##########################################################
 
-WRK_DIR=/work
+WRK_DIR=/Users/Shared/work
 OPT_DIR=$WRK_DIR/opt
 SRC_DIR=$OPT_DIR/src
 TMP_DIR=$OPT_DIR/tmp
@@ -40,7 +40,8 @@ export LDFLAGS=-L$LIB_DIR
 # FYI: Python and OpenSSL have problems with mutli-core compilation
 export MAKEFLAGS=-j$(sysctl -n hw.ncpu)  # use all available cores
 
-export MACOSX_DEPLOYMENT_TARGET=10.11   # OS X El Capitan
+export MACOSX_DEPLOYMENT_TARGET=10.9   # OS X Mavericks
+export SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk
 
 ### download URLs ##############################################################
 
