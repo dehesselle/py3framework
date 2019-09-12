@@ -5,7 +5,7 @@
 
 ### build directories ##########################################################
 
-WRK_DIR=/Users/Shared/work
+WRK_DIR=/Users/Shared/work/py3framework
 OPT_DIR=$WRK_DIR/opt
 SRC_DIR=$OPT_DIR/src
 TMP_DIR=$OPT_DIR/tmp
@@ -49,7 +49,7 @@ export SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX${MACOSX_DEPLOYMEN
 
 URL_GETTEXT=https://ftp.halifax.rwth-aachen.de/gnu/gettext/gettext-0.20.1.tar.xz
 URL_ICONV=https://ftp.halifax.rwth-aachen.de/gnu/libiconv/libiconv-1.16.tar.gz
-URL_OPENSSL=https://www.openssl.org/source/openssl-1.1.1c.tar.gz
+URL_OPENSSL=https://www.openssl.org/source/openssl-1.1.1d.tar.gz
 URL_PYTHON=https://www.python.org/ftp/python/$PY3_MAJOR.$PY3_MINOR.$PY3_PATCH/Python-$PY3_MAJOR.$PY3_MINOR.$PY3_PATCH.tar.xz
 URL_READLINE=https://ftp.halifax.rwth-aachen.de/gnu/readline/readline-8.0.tar.gz
 URL_LIBXML2=ftp://xmlsoft.org/libxml2/libxml2-2.9.9.tar.gz
