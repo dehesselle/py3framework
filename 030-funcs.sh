@@ -7,16 +7,21 @@
 
 function make_makeinstall
 {
-  make
-  make install
+  local make_flags="$1"
+  local make_install_flags="$2"
+
+  make $make_flags
+  make install $make_install_flags
 }
 
 function configure_make_makeinstall
 {
-  local flags="$*"
+  local configure_flags="$1"
+  local make_flags="$2"
+  local make_install_flags="$3"
 
-  ./configure --prefix=$OPT_DIR $flags
-  make_makeinstall
+  ./configure --prefix=$OPT_DIR $configure_flags
+  make_makeinstall "$make_flags" "$make_install_flags"
 }
 
 ### determine compressor flag by file extension ################################

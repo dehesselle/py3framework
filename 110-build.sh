@@ -42,7 +42,7 @@ configure_make_makeinstall
 ### install gettext ############################################################
 
 get_source $URL_GETTEXT
-configure_make_makeinstall --without-emacs --disable-java --disable-native-java --disable-libasprintf --disable-csharp
+configure_make_makeinstall "--without-emacs --disable-java --disable-native-java --disable-libasprintf --disable-csharp"
 
 ### install lzma ###############################################################
 
@@ -56,7 +56,7 @@ get_source $URL_PYTHON
 (
   unset MAKEFLAGS    # revoke multi-core compilation
   export CFLAGS="$CFLAGS -I$SDKROOT/System/Library/Frameworks/Tk.framework/Versions/Current/Headers"
-  configure_make_makeinstall --enable-framework=$FRA_DIR --with-openssl=$OPT_DIR --enable-optimizations
+  configure_make_makeinstall "--enable-framework=$FRA_DIR --with-openssl=$OPT_DIR --enable-optimizations" "" "PYTHONAPPSDIR=$TMP_DIR"
 )
 
 ### remove stack_size linker flag ##############################################
@@ -74,4 +74,4 @@ sed -i "" "s/-Wl,-stack_size,1000000/ /" $PY3_FRA_LIB_DIR/python$PY3_MAJOR.$PY3_
 ### install Libxml2 ############################################################
 
 get_source $URL_LIBXML2
-configure_make_makeinstall --with-python=$PY3_FRA_BIN_DIR/python$PY3_MAJOR
+configure_make_makeinstall "--with-python=$PY3_FRA_BIN_DIR/python$PY3_MAJOR"
