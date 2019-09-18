@@ -55,7 +55,7 @@ get_source $URL_PYTHON
 
 (
   unset MAKEFLAGS    # revoke multi-core compilation
-  export CFLAGS="$CFLAGS -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$MACOSX_DEPLOYMENT_TARGET.sdk/System/Library/Frameworks/Tk.framework/Versions/Current/Headers"
+  export CFLAGS="$CFLAGS -I$SDKROOT/System/Library/Frameworks/Tk.framework/Versions/Current/Headers"
   configure_make_makeinstall --enable-framework=$FRA_DIR --with-openssl=$OPT_DIR --enable-optimizations
 )
 
