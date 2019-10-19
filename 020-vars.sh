@@ -15,12 +15,12 @@ FRA_DIR=$OPT_DIR/Frameworks
 
 ### Python version #############################################################
 
-# Set the Python version here. All directories and filenames will adapt 
+# Set the Python version here. All directories and filenames will adapt
 # accordingly using these variables.
 
 PY3_MAJOR=3
 PY3_MINOR=7
-PY3_PATCH=4
+PY3_PATCH=5
 
 ### Python.framework directories ###############################################
 
