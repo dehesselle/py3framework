@@ -86,3 +86,14 @@ function relocate_dependency
 
   install_name_tool -change $source $target $library
 }
+
+###
+
+function set_to_rpath
+{
+  local binary=$1
+
+  while IFS= read -r library; do
+    install_name_tool -change $library @rpath/$(basename $library) $binary
+  done < <(otool -L $binary | grep $LIB_DIR | awk '{ print $1 }')
+}
