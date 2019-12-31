@@ -66,28 +66,15 @@ function get_source
 
 ### remove build path from dylib id ############################################
 
-function reset_dylib_name
+function reset_library_name
 {
-  local file=$1   # dylib filename
+  local library=$1
 
-  local name=$(otool -D $file | tail -n 1)
-  install_name_tool -id $(basename $name) $file   # remote path from library id
+  local name=$(otool -D $library | tail -n 1)
+  install_name_tool -id $(basename $name) $library  # remove path
 }
 
-### relocate a library dependency ##############################################
-
-function relocate_dependency
-{
-  local target=$1    # fully qualified path and library name to new location
-  local library=$2   # library where 'source' get changed to 'target'
-
-  local source_lib=${target##*/}   # get library filename from target location
-  local source=$(otool -L $library | grep "$source_lib (comp" | awk '{ print $1 }')
-
-  install_name_tool -change $source $target $library
-}
-
-###
+### change link path to rpath ##################################################
 
 function set_to_rpath
 {
