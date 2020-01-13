@@ -74,13 +74,19 @@ function reset_library_name
   install_name_tool -id $(basename $name) $library  # remove path
 }
 
-### change link path to rpath ##################################################
+### change library link path in a binary (library/executable) ##################
 
-function set_to_rpath
+function set_library_link_path
 {
-  local binary=$1
+  local link_path_new=$1
+  local binary=$2
+  local link_path_old=$3   # optional
+
+  if [ -z $link_path_old ]; then
+    link_path_old=$LIB_DIR
+  fi
 
   while IFS= read -r library; do
-    install_name_tool -change $library @rpath/$(basename $library) $binary
-  done < <(otool -L $binary | grep $LIB_DIR | awk '{ print $1 }')
+    install_name_tool -change $library $link_path_new/$(basename $library) $binary
+  done < <(otool -L $binary | grep $link_path_old | awk '{ print $1 }')
 }

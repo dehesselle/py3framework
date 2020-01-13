@@ -19,6 +19,10 @@ if [ ! -d $SDKROOT ]; then
   exit 1
 fi
 
+if [ -d $WRK_DIR ]; then
+  echo "error: WRK_DIR exists: $WRK_DIR"
+fi
+
 ### install iconv ##############################################################
 
 get_source $URL_ICONV
@@ -63,7 +67,9 @@ get_source $URL_PYTHON
 (
   unset MAKEFLAGS    # revoke multi-core compilation
   export CFLAGS="$CFLAGS -I$SDKROOT/System/Library/Frameworks/Tk.framework/Versions/Current/Headers"
-  configure_make_makeinstall "--enable-framework=$FRA_DIR --with-openssl=$OPT_DIR " "" "PYTHONAPPSDIR=$TMP_DIR"
+  configure_make_makeinstall "--enable-framework=$FRA_DIR --with-openssl=$OPT_DIR --enable-optimizations" "" "PYTHONAPPSDIR=$TMP_DIR"
+  # speedup for testing purposes: without '--enable-optimizations'
+  #configure_make_makeinstall "--enable-framework=$FRA_DIR --with-openssl=$OPT_DIR" "" "PYTHONAPPSDIR=$TMP_DIR"
 )
 
 ### remove stack_size linker flag ##############################################

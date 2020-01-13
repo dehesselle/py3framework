@@ -20,16 +20,19 @@ FRA_DIR=$OPT_DIR/Frameworks
 
 PY3_MAJOR=3
 PY3_MINOR=7
-PY3_PATCH=5
+PY3_PATCH=6
 
 ### Python.framework directories ###############################################
 
 PY3_FRA_DIR=$FRA_DIR/Python.framework
-PY3_FRA_EXT_LIB_DIR=$PY3_FRA_DIR/Versions/$PY3_MAJOR.$PY3_MINOR/Libraries
-PY3_FRA_RES_DIR=$PY3_FRA_DIR/Versions/$PY3_MAJOR.$PY3_MINOR/Resources
-PY3_FRA_BIN_DIR=$PY3_FRA_DIR/Versions/$PY3_MAJOR.$PY3_MINOR/bin
-PY3_FRA_LIB_DIR=$PY3_FRA_DIR/Versions/$PY3_MAJOR.$PY3_MINOR/lib
-PY3_FRA_LIB=$PY3_FRA_DIR/Versions/$PY3_MAJOR.$PY3_MINOR/Python
+PY3_FRA_VER_PY3_DIR=$PY3_FRA_DIR/Versions/$PY3_MAJOR.$PY3_MINOR
+PY3_FRA_BIN_DIR=$PY3_FRA_VER_PY3_DIR/bin
+PY3_FRA_EXT_LIB_DIR=$PY3_FRA_VER_PY3_DIR/Libraries
+PY3_FRA_LIB_DIR=$PY3_FRA_VER_PY3_DIR/lib
+PY3_FRA_LIB_PY3_DIR=$PY3_FRA_LIB_DIR/python$PY3_MAJOR.$PY3_MINOR
+PY3_FRA_RES_DIR=$PY3_FRA_VER_PY3_DIR/Resources
+
+PY3_FRA_LIB=$PY3_FRA_VER_PY3_DIR/Python
 
 ### compiler settings ##########################################################
 
@@ -49,9 +52,9 @@ export SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX${MACOSX_DEPLOYMEN
 
 URL_GETTEXT=https://ftp.halifax.rwth-aachen.de/gnu/gettext/gettext-0.20.1.tar.xz
 URL_ICONV=https://ftp.halifax.rwth-aachen.de/gnu/libiconv/libiconv-1.16.tar.gz
+URL_LIBXML2=ftp://xmlsoft.org/libxml2/libxml2-2.9.10.tar.gz
 URL_OPENSSL=https://www.openssl.org/source/openssl-1.1.1d.tar.gz
 URL_PYTHON=https://www.python.org/ftp/python/$PY3_MAJOR.$PY3_MINOR.$PY3_PATCH/Python-$PY3_MAJOR.$PY3_MINOR.$PY3_PATCH.tar.xz
 URL_READLINE=https://ftp.halifax.rwth-aachen.de/gnu/readline/readline-8.0.tar.gz
-URL_LIBXML2=ftp://xmlsoft.org/libxml2/libxml2-2.9.9.tar.gz
 URL_XZUTILS=https://tukaani.org/xz/xz-5.2.4.tar.xz
 URL_ZLIB=https://zlib.net/zlib-1.2.11.tar.gz
