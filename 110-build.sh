@@ -72,18 +72,6 @@ get_source $URL_PYTHON
   #configure_make_makeinstall "--enable-framework=$FRA_DIR --with-openssl=$OPT_DIR" "" "PYTHONAPPSDIR=$TMP_DIR"
 )
 
-### remove stack_size linker flag ##############################################
-
-# according to this
-# https://gitlab.gnome.org/GNOME/gtk-osx/blob/5131320175b7048d48930bfa0e6173101747fcc2/README.md
-# we need to replace
-#   LINKFORSHARED: -Wl,stack_size,1000000 -framework CoreFoundation
-# with
-#   LINKFORSHARED: -framework CoreFoundation
-# effectively removing the stack_size parameter
-
-sed -i "" "s/-Wl,-stack_size,1000000/ /" $PY3_FRA_LIB_DIR/python$PY3_MAJOR.$PY3_MINOR/_sysconfigdata_m_darwin_darwin.py
-
 ### install Libxml2 ############################################################
 
 get_source $URL_LIBXML2
