@@ -71,6 +71,7 @@ function reset_library_name
   local library=$1
 
   local name=$(otool -D $library | tail -n 1)
+  chmod 644 $library
   install_name_tool -id $(basename $name) $library  # remove path
 }
 
@@ -86,7 +87,10 @@ function set_library_link_path
     link_path_old=$LIB_DIR
   fi
 
+  chmod 644 $binary
   while IFS= read -r library; do
-    install_name_tool -change $library $link_path_new/$(basename $library) $binary
+    install_name_tool \
+        -change $library $link_path_new/$(basename $library) \
+        $binary
   done < <(otool -L $binary | grep $link_path_old | awk '{ print $1 }')
 }

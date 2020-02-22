@@ -50,7 +50,6 @@ cp $LIB_DIR/libxml2.2.dylib $PY3_FRA_EXT_LIB_DIR
 ### change link paths for libraries in: lib-dynload ############################
 
 while IFS= read -r library; do
-  chmod 644 $library
   reset_library_name $library
   set_library_link_path @loader_path/../../../Libraries $library
 done < <(find $PY3_FRA_LIB_PY3_DIR/lib-dynload -maxdepth 1 -name "*.so")
@@ -58,7 +57,6 @@ done < <(find $PY3_FRA_LIB_PY3_DIR/lib-dynload -maxdepth 1 -name "*.so")
 ### change link paths for libraries in: site-packages ##########################
 
 while IFS= read -r library; do
-  chmod 644 $library
   reset_library_name $library
   set_library_link_path @loader_path/../../../Libraries $library
 done < <(find $PY3_FRA_LIB_PY3_DIR/site-packages -maxdepth 1 -name "*.so")
@@ -66,24 +64,34 @@ done < <(find $PY3_FRA_LIB_PY3_DIR/site-packages -maxdepth 1 -name "*.so")
 ### change link paths for libraries in: Libraries ##############################
 
 while IFS= read -r library; do
-  chmod 644 $library
   reset_library_name $library
   set_library_link_path @loader_path $library
 done < <(find $PY3_FRA_EXT_LIB_DIR -maxdepth 1 -name "*.dylib")
 
 ### change link paths for libraries in: bin ####################################
 
-set_library_link_path @executable_path/.. $PY3_FRA_LIB $PY3_FRA_BIN_DIR/python$PY3_MAJOR.${PY3_MINOR} $(dirname $PY3_FRA_LIB)
-set_library_link_path @executable_path/.. $PY3_FRA_BIN_DIR/python$PY3_MAJOR.${PY3_MINOR}m $(dirname $PY3_FRA_LIB)
+set_library_link_path \
+    @executable_path/.. \
+    $PY3_FRA_BIN_DIR/python$PY3_MAJOR.$PY3_MINOR \
+    $(dirname $PY3_FRA_LIB)
+
+chmod 755 $PY3_FRA_BIN_DIR/python$PY3_MAJOR.$PY3_MINOR
 
 ### change link paths for libraries in: Python.app #############################
 
-set_library_link_path @executable_path/../../../.. $PY3_FRA_RES_DIR/Python.app/Contents/MacOS/Python $(dirname $PY3_FRA_LIB)
-set_library_link_path @executable_path/../../../../Libraries $PY3_FRA_RES_DIR/Python.app/Contents/MacOS/Python $LIB_DIR
+set_library_link_path \
+    @executable_path/../../../.. \
+    $PY3_FRA_RES_DIR/Python.app/Contents/MacOS/Python \
+    $(dirname $PY3_FRA_LIB)
+set_library_link_path \
+    @executable_path/../../../../Libraries \
+    $PY3_FRA_RES_DIR/Python.app/Contents/MacOS/Python \
+    $LIB_DIR
+
+chmod 755 $PY3_FRA_RES_DIR/Python.app/Contents/MacOS/Python
 
 ### change link paths for libraries in: main Python library ####################
 
-chmod 644 $PY3_FRA_LIB
 set_library_link_path @loader_path/Libraries $PY3_FRA_LIB
 
 ### use environment lookup for interpreter path ################################
@@ -102,10 +110,8 @@ sed -i '' "1s/.*/#!\/usr\/bin\/env python$PY3_MAJOR.$PY3_MINOR\
 sed -i '' "1s/.*/#!\/usr\/bin\/env python$PY3_MAJOR.$PY3_MINOR\
 /" $PY3_FRA_BIN_DIR/pydoc$PY3_MAJOR.$PY3_MINOR
 sed -i '' "1s/.*/#!\/usr\/bin\/env python$PY3_MAJOR.$PY3_MINOR\
-/" $PY3_FRA_BIN_DIR/python$PY3_MAJOR.${PY3_MINOR}m-config
-sed -i '' "1s/.*/#!\/usr\/bin\/env python$PY3_MAJOR.$PY3_MINOR\
-/" $PY3_FRA_BIN_DIR/pyvenv-$PY3_MAJOR.$PY3_MINOR
+/" $PY3_FRA_BIN_DIR/python$PY3_MAJOR.${PY3_MINOR}-config
 
-# fix 'pip3' not being a symlink to 'pip$PY3_MAJOR.$PY3_MINOR'
+# turn 'pip3' into a symlink to 'pip$PY3_MAJOR.$PY3_MINOR'
 cd $PY3_FRA_BIN_DIR
 ln -sf pip$PY3_MAJOR.$PY3_MINOR pip3
