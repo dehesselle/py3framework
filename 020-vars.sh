@@ -20,7 +20,7 @@ FRA_DIR=$OPT_DIR/Frameworks
 
 PY3_MAJOR=3
 PY3_MINOR=8
-PY3_PATCH=1
+PY3_PATCH=2
 
 ### Python.framework directories ###############################################
 
