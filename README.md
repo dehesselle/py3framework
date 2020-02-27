@@ -8,7 +8,7 @@ Although you can download an official Python 3 framework build from https://www.
 
 ### Prerequisites
 
-I am using Xcode 10.3 on Mojave with the 10.9 SDK to build this. Other combinations and build targets may work as well (I've built on El Capitan for a while myself), YMMV.  
+It's best to use a recent version of Xcode along with the 10.9 SDK to achieve broad backward compatiblity.  
 You can get older SDKs from older versions of Xcode (check the downloads section in your Apple Developer account) or use little helpers like [XcodeLegacy](https://github.com/devernay/xcodelegacy).
 
 ### Instructions
@@ -20,10 +20,10 @@ You can get older SDKs from older versions of Xcode (check the downloads section
   ```
 
 - Run the scripts to build and package `Python.framework`.
-  
+
   ```bash
   ./110-build.sh      # download and compile everything
-  ./210-package.sh    # make the Framework relocatable
+  ./210-package.sh    # make the framework relocatable
   ```
 
 If you left everything at default, you'll find `Python.framework` in
