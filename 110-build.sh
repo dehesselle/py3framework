@@ -53,7 +53,13 @@ configure_make_makeinstall
 ### install gettext ############################################################
 
 get_source $URL_GETTEXT
-configure_make_makeinstall "--without-emacs --disable-java --disable-native-java --disable-libasprintf --disable-csharp"
+configure_make_makeinstall "\
+  --disable-csharp\
+  --without-emacs\
+  --disable-java\
+  --disable-libasprintf\
+  --disable-native-java\
+"
 
 ### install lzma ###############################################################
 
@@ -66,13 +72,24 @@ get_source $URL_PYTHON
 
 (
   unset MAKEFLAGS    # revoke multi-core compilation
-  export CFLAGS="$CFLAGS -I$SDKROOT/System/Library/Frameworks/Tk.framework/Versions/Current/Headers"
-  configure_make_makeinstall "--enable-framework=$FRA_DIR --with-openssl=$OPT_DIR --enable-optimizations" "" "PYTHONAPPSDIR=$TMP_DIR"
-  # speedup for testing purposes: without '--enable-optimizations'
-  #configure_make_makeinstall "--enable-framework=$FRA_DIR --with-openssl=$OPT_DIR" "" "PYTHONAPPSDIR=$TMP_DIR"
+  export CFLAGS="\
+    $CFLAGS \
+    -I$SDKROOT/System/Library/Frameworks/Tk.framework/Versions/Current/Headers\
+  "
+  configure_make_makeinstall "\
+    --enable-framework=$FRA_DIR\
+    --with-openssl=$OPT_DIR\
+    --enable-optimizations\
+    " "" "PYTHONAPPSDIR=$TMP_DIR"
+
+  # speedup for testing purposes: remove '--enable-optimizations'
 )
 
 ### install Libxml2 ############################################################
 
 get_source $URL_LIBXML2
-configure_make_makeinstall "--with-python=$PY3_FRA_BIN_DIR/python$PY3_MAJOR"
+
+(
+  export PATH=$PY3_FRA_BIN_DIR:$PATH   # so libxml2 finds python3.8-config
+  configure_make_makeinstall "--with-python=$PY3_FRA_BIN_DIR/python$PY3_MAJOR"
+)
