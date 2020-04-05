@@ -13,6 +13,16 @@ LIB_DIR=$OPT_DIR/lib
 INC_DIR=$OPT_DIR/include
 FRA_DIR=$OPT_DIR/Frameworks
 
+### use TMP_DIR for everything temporary #######################################
+
+export TMP=$TMP_DIR
+export TEMP=$TMP_DIR
+export TMPDIR=$TMP_DIR
+export XDG_CACHE_HOME=$TMP_DIR/xdgcache     # instead ~/.cache
+export XDG_CONFIG_HOME=$TMP_DIR/xdgconfig   # instead ~/.config
+export PIP_CACHE_DIR=$TMP_DIR/pip           # instead ~/Library/Caches/pip
+export PIPENV_CACHE_DIR=$TMP_DIR/pipenv     # instead ~/Library/Caches/pipenv
+
 ### Python version #############################################################
 
 # Set the Python version here. All directories and filenames will adapt
