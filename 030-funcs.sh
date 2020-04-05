@@ -57,7 +57,7 @@ function get_source
   # This downloads a file and pipes it directly into tar (file is not saved
   # to disk) to extract it. Output is saved temporarily to determine
   # the directory the files have been extracted to.
-  curl -L $url | tar xv$(get_compressor_flag $url) 2>$log
+  curl -L $(preferCachedUrl $url) | tar xv$(get_compressor_flag $url) 2>$log
   local dir=$(head -1 $log | awk '{ print $2 }')   # get first file from archive
   dir=${dir%%/*}   # remove everything except the directory name
   cd $dir
@@ -93,4 +93,16 @@ function set_library_link_path
         -change $library $link_path_new/$(basename $library) \
         $binary
   done < <(otool -L $binary | grep $link_path_old | awk '{ print $1 }')
+}
+
+### replace URL ################################################################
+
+function preferCachedUrl
+{
+  local url=$1
+
+  # This is a placeholder function you can use to replace URLs with locally
+  # mirrored ones.
+
+  echo $url
 }
