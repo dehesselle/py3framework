@@ -29,8 +29,8 @@ export PIPENV_CACHE_DIR=$TMP_DIR/pipenv     # instead ~/Library/Caches/pipenv
 # accordingly using these variables.
 
 PY3_MAJOR=3
-PY3_MINOR=8
-PY3_PATCH=2
+PY3_MINOR=6
+PY3_PATCH=10
 
 ### Python.framework directories ###############################################
 
