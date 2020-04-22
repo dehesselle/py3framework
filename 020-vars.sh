@@ -60,11 +60,12 @@ export SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX${MACOSX_DEPLOYMEN
 
 # Python $PY3_MAJOR.$PY3_MINOR.$PY3_PATCH and latest "everything else"
 
-URL_GETTEXT=https://ftp.halifax.rwth-aachen.de/gnu/gettext/gettext-0.20.1.tar.xz
+URL_GETTEXT=https://ftp.halifax.rwth-aachen.de/gnu/gettext/gettext-0.20.2.tar.xz
 URL_ICONV=https://ftp.halifax.rwth-aachen.de/gnu/libiconv/libiconv-1.16.tar.gz
 URL_LIBXML2=ftp://xmlsoft.org/libxml2/libxml2-2.9.10.tar.gz
-URL_OPENSSL=https://www.openssl.org/source/openssl-1.1.1f.tar.gz
+URL_OPENSSL=https://www.openssl.org/source/openssl-1.1.1g.tar.gz
 URL_PYTHON=https://www.python.org/ftp/python/$PY3_MAJOR.$PY3_MINOR.$PY3_PATCH/Python-$PY3_MAJOR.$PY3_MINOR.$PY3_PATCH.tar.xz
 URL_READLINE=https://ftp.halifax.rwth-aachen.de/gnu/readline/readline-8.0.tar.gz
 URL_XZUTILS=https://tukaani.org/xz/xz-5.2.5.tar.xz
 URL_ZLIB=https://zlib.net/zlib-1.2.11.tar.gz
+
