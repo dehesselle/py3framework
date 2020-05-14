@@ -54,7 +54,8 @@ export LDFLAGS=-L$LIB_DIR
 export MAKEFLAGS=-j$(sysctl -n hw.ncpu)  # use all available cores
 
 export MACOSX_DEPLOYMENT_TARGET=10.9   # OS X Mavericks
-export SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk
+[ -z $SDKROOT_DIR ] && SDKROOT_DIR=/Library/Developer/CommandLineTools/SDKs
+export SDKROOT=$SDKROOT_DIR/MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk
 
 ### download URLs ##############################################################
 
