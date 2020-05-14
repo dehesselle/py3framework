@@ -30,7 +30,7 @@ export PIPENV_CACHE_DIR=$TMP_DIR/pipenv     # instead ~/Library/Caches/pipenv
 
 PY3_MAJOR=3
 PY3_MINOR=8
-PY3_PATCH=2
+PY3_PATCH=3
 
 ### Python.framework directories ###############################################
 
@@ -68,4 +68,3 @@ URL_PYTHON=https://www.python.org/ftp/python/$PY3_MAJOR.$PY3_MINOR.$PY3_PATCH/Py
 URL_READLINE=https://ftp.halifax.rwth-aachen.de/gnu/readline/readline-8.0.tar.gz
 URL_XZUTILS=https://tukaani.org/xz/xz-5.2.5.tar.xz
 URL_ZLIB=https://zlib.net/zlib-1.2.11.tar.gz
-
