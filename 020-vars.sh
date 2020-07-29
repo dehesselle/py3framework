@@ -30,7 +30,7 @@ export PIPENV_CACHE_DIR=$TMP_DIR/pipenv     # instead ~/Library/Caches/pipenv
 
 PY3_MAJOR=3
 PY3_MINOR=8
-PY3_PATCH=3
+PY3_PATCH=5
 
 ### Python.framework directories ###############################################
 
@@ -54,14 +54,14 @@ export LDFLAGS=-L$LIB_DIR
 export MAKEFLAGS=-j$(sysctl -n hw.ncpu)  # use all available cores
 
 export MACOSX_DEPLOYMENT_TARGET=10.9   # OS X Mavericks
-[ -z $SDKROOT_DIR ] && SDKROOT_DIR=/Library/Developer/CommandLineTools/SDKs
+[ -z $SDKROOT_DIR ] && SDKROOT_DIR=/opt/sdks
 export SDKROOT=$SDKROOT_DIR/MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk
 
 ### download URLs ##############################################################
 
 # Python $PY3_MAJOR.$PY3_MINOR.$PY3_PATCH and latest "everything else"
 
-URL_GETTEXT=https://ftp.halifax.rwth-aachen.de/gnu/gettext/gettext-0.20.2.tar.xz
+URL_GETTEXT=https://ftp.halifax.rwth-aachen.de/gnu/gettext/gettext-0.21.tar.xz
 URL_ICONV=https://ftp.halifax.rwth-aachen.de/gnu/libiconv/libiconv-1.16.tar.gz
 URL_LIBXML2=ftp://xmlsoft.org/libxml2/libxml2-2.9.10.tar.gz
 URL_OPENSSL=https://www.openssl.org/source/openssl-1.1.1g.tar.gz
