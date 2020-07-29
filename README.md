@@ -13,10 +13,17 @@ You can get older SDKs from older versions of Xcode (check the downloads section
 
 ### Instructions
 
-- Adjust the build directory in `020-vars.sh` to your liking. The default is:
+- Review the following settings in `020-vars.sh` and adjust to your liking.
 
   ```bash
+  # line 8: build directory
   WRK_DIR=/Users/Shared/work/py3framework
+  
+  # line 56: target platform
+  export MACOSX_DEPLOYMENT_TARGET=10.9   # OS X Mavericks
+
+  # line 57: parent folder containing your MacOSX*.sdk
+  [ -z $SDKROOT_DIR ] && SDKROOT_DIR=/opt/sdks
   ```
 
 - Run the scripts to build and package `Python.framework`.
