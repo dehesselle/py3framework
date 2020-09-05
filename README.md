@@ -18,7 +18,7 @@ You can get older SDKs from older versions of Xcode (check the downloads section
   ```bash
   # line 8: build directory
   WRK_DIR=/Users/Shared/work/py3framework
-  
+
   # line 56: target platform
   export MACOSX_DEPLOYMENT_TARGET=10.9   # OS X Mavericks
 
