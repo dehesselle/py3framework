@@ -8,19 +8,23 @@ SELF_DIR=$(F=$0; while [ ! -z $(readlink $F) ] && F=$(readlink $F); \
   cd $(dirname $F); F=$(basename $F); [ -L $F ]; do :; done; echo $(pwd -P))
 for script in $SELF_DIR/0??-*.sh; do source $script; done
 
+include_file echo_.sh
+include_file error_.sh
+
 ### halt on errors #############################################################
 
-set -e
+error_trace_enable
 
 ### preliminary checks #########################################################
 
 if [ ! -d $SDKROOT ]; then
-  echo "error: SDK not found: $SDKROOT"
+  echo_e "SDK not found: $SDKROOT"
   exit 1
 fi
 
 if [ -d $WRK_DIR ]; then
-  echo "error: WRK_DIR exists: $WRK_DIR"
+  echo_e "WRK_DIR exists: $WRK_DIR"
+  exit 1
 fi
 
 ### install iconv ##############################################################

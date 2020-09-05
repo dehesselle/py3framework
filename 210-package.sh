@@ -8,9 +8,12 @@ SELF_DIR=$(F=$0; while [ ! -z $(readlink $F) ] && F=$(readlink $F); \
   cd $(dirname $F); F=$(basename $F); [ -L $F ]; do :; done; echo $(pwd -P))
 for script in $SELF_DIR/0??-*.sh; do source $script; done
 
+include_file error_.sh
+include_file lib_.sh
+
 ### halt on errors #############################################################
 
-set -e
+error_trace_enable
 
 ### create 'Libraries' symlink inside Framework bundle #########################
 
@@ -47,54 +50,49 @@ cp $LIB_DIR/libiconv.2.dylib $PY3_FRA_EXT_LIB_DIR
 
 cp $LIB_DIR/libxml2.2.dylib $PY3_FRA_EXT_LIB_DIR
 
-### change link paths for libraries in: lib-dynload ############################
+### change link paths in libraries #############################################
 
-while IFS= read -r library; do
-  reset_library_name $library
-  set_library_link_path @loader_path/../../../Libraries $library
-done < <(find $PY3_FRA_LIB_PY3_DIR/lib-dynload -maxdepth 1 -name "*.so")
+lib_change_paths \
+  @loader_path/../../../Libraries \
+  $PY3_FRA_EXT_LIB_DIR \
+  $PY3_FRA_LIB_PY3_DIR/lib-dynload/_hashlib.cpython-$PY3_MAJOR$PY3_MINOR-darwin.so \
+  $PY3_FRA_LIB_PY3_DIR/lib-dynload/_lzma.cpython-$PY3_MAJOR$PY3_MINOR-darwin.so \
+  $PY3_FRA_LIB_PY3_DIR/lib-dynload/_ssl.cpython-$PY3_MAJOR$PY3_MINOR-darwin.so \
+  $PY3_FRA_LIB_PY3_DIR/lib-dynload/binascii.cpython-$PY3_MAJOR$PY3_MINOR-darwin.so \
+  $PY3_FRA_LIB_PY3_DIR/lib-dynload/readline.cpython-$PY3_MAJOR$PY3_MINOR-darwin.so \
+  $PY3_FRA_LIB_PY3_DIR/lib-dynload/zlib.cpython-$PY3_MAJOR$PY3_MINOR-darwin.so \
+  $PY3_FRA_LIB_PY3_DIR/site-packages/libxml2mod.so
 
-### change link paths for libraries in: site-packages ##########################
+lib_change_siblings $PY3_FRA_EXT_LIB_DIR
 
-while IFS= read -r library; do
-  reset_library_name $library
-  set_library_link_path @loader_path/../../../Libraries $library
-done < <(find $PY3_FRA_LIB_PY3_DIR/site-packages -maxdepth 1 -name "*.so")
+### change link paths in python executable #####################################
 
-### change link paths for libraries in: Libraries ##############################
-
-while IFS= read -r library; do
-  reset_library_name $library
-  set_library_link_path @loader_path $library
-done < <(find $PY3_FRA_EXT_LIB_DIR -maxdepth 1 -name "*.dylib")
-
-### change link paths for libraries in: bin ####################################
-
-set_library_link_path \
+lib_change_paths \
     @executable_path/.. \
-    $PY3_FRA_BIN_DIR/python$PY3_MAJOR.$PY3_MINOR \
-    $(dirname $PY3_FRA_LIB)
+    $(dirname $PY3_FRA_LIB) \
+    $PY3_FRA_BIN_DIR/python$PY3_MAJOR.$PY3_MINOR
 
 chmod 755 $PY3_FRA_BIN_DIR/python$PY3_MAJOR.$PY3_MINOR
 
-### change link paths for libraries in: Python.app #############################
+### change link paths in Python.app ############################################
 
-set_library_link_path \
+lib_change_paths \
     @executable_path/../../../.. \
-    $PY3_FRA_RES_DIR/Python.app/Contents/MacOS/Python \
-    $(dirname $PY3_FRA_LIB)
-set_library_link_path \
+    $(dirname $PY3_FRA_LIB) \
+    $PY3_FRA_RES_DIR/Python.app/Contents/MacOS/Python
+
+lib_change_paths \
     @executable_path/../../../../Libraries \
-    $PY3_FRA_RES_DIR/Python.app/Contents/MacOS/Python \
-    $LIB_DIR
+    $LIB_DIR \
+    $PY3_FRA_RES_DIR/Python.app/Contents/MacOS/Python
 
 chmod 755 $PY3_FRA_RES_DIR/Python.app/Contents/MacOS/Python
 
 ### change link paths for libraries in: main Python library ####################
 
-set_library_link_path @loader_path/Libraries $PY3_FRA_LIB
+lib_change_paths @loader_path/Libraries $PY3_FRA_EXT_LIB_DIR $PY3_FRA_LIB
 
-### use environment lookup for interpreter path ################################
+### use environment lookup for interpreter #####################################
 
 # The linebreaks are intentional: this is the way to insert newlines with
 # this version of 'sed'.
