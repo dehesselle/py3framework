@@ -1,0 +1,36 @@
+--- Python-3.8.5/Python/initconfig.c	2020-07-20 15:01:32.000000000 +0200
++++ /Users/rene/Developer/py3framework/initconfig.c	2020-09-06 12:13:16.000000000 +0200
+@@ -1393,26 +1393,13 @@
+ {
+     assert(config->pycache_prefix == NULL);
+ 
+-    const wchar_t *xoption = config_get_xoption(config, L"pycache_prefix");
+-    if (xoption) {
+-        const wchar_t *sep = wcschr(xoption, L'=');
+-        if (sep && wcslen(sep) > 1) {
+-            config->pycache_prefix = _PyMem_RawWcsdup(sep + 1);
+-            if (config->pycache_prefix == NULL) {
+-                return _PyStatus_NO_MEMORY();
+-            }
+-        }
+-        else {
+-            // PYTHONPYCACHEPREFIX env var ignored
+-            // if "-X pycache_prefix=" option is used
+-            config->pycache_prefix = NULL;
+-        }
+-        return _PyStatus_OK();
+-    }
+-
+-    return CONFIG_GET_ENV_DUP(config, &config->pycache_prefix,
+-                              L"PYTHONPYCACHEPREFIX",
+-                              "PYTHONPYCACHEPREFIX");
++    char cache_dir[256];
++    strcat(cache_dir, getenv("HOME"));
++    strcat(cache_dir, "/Library/Caches/org.inkscape.Inkscape");
++    return config_set_bytes_string(config, 
++                                   &config->pycache_prefix,
++                                   cache_dir,
++                                   "cannot decode");
+ }
+ 
+ 
