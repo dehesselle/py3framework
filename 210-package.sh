@@ -76,9 +76,8 @@ chmod 755 $PY3_FRA_BIN_DIR/python$PY3_MAJOR.$PY3_MINOR
 
 ### change link paths in Python.app ############################################
 
-lib_change_paths \
-    @executable_path/../../../.. \
-    $(dirname $PY3_FRA_LIB) \
+lib_change_path \
+    @executable_path/../../../../Python \
     $PY3_FRA_RES_DIR/Python.app/Contents/MacOS/Python
 
 lib_change_paths \
