@@ -74,10 +74,13 @@ configure_make_makeinstall
 
 get_source $URL_PYTHON
 
-# Apply any patches if present.
-for patch in $SELF_DIR/*.patch; do
-  patch -p1 < $patch
-done
+( # Apply any patches if present.
+
+  shopt -s nullglob
+  for patch in $SELF_DIR/*.patch; do
+    patch -p1 < $patch
+  done
+)
 
 (
   unset MAKEFLAGS    # revoke multi-core compilation
