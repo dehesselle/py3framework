@@ -112,3 +112,9 @@ sed -i '' "1s/.*/#!\/usr\/bin\/env python$PY3_MAJOR.$PY3_MINOR\
 # turn 'pip3' into a symlink to 'pip$PY3_MAJOR.$PY3_MINOR'
 cd $PY3_FRA_BIN_DIR
 ln -sf pip$PY3_MAJOR.$PY3_MINOR pip3
+
+### remove all cache files #####################################################
+
+for cache_dir in $(find $PY3_FRA_DIR -type d -name "__pycache__"); do
+  rm -rf $cache_dir
+done
