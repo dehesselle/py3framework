@@ -11,6 +11,7 @@ function get_compressor_flag
     gz)  echo "z" ;;
     bz2) echo "j" ;;
     xz)  echo "J" ;;
+    tgz) echo "z" ;;
     *)   echo_e "unknown extension $extension" >&2
   esac
 }
