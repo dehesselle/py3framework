@@ -5,13 +5,15 @@
 
 ### build directories ##########################################################
 
-WRK_DIR=/Users/Shared/work/py3framework
-OPT_DIR=$WRK_DIR/opt
-SRC_DIR=$OPT_DIR/src
-TMP_DIR=$OPT_DIR/tmp
-LIB_DIR=$OPT_DIR/lib
-INC_DIR=$OPT_DIR/include
-FRA_DIR=$OPT_DIR/Frameworks
+if [ -z $WRK_DIR ]; then
+  WRK_DIR=/Users/Shared/work/py3framework
+fi
+
+SRC_DIR=$WRK_DIR/src
+TMP_DIR=$WRK_DIR/tmp
+LIB_DIR=$WRK_DIR/lib
+INC_DIR=$WRK_DIR/include
+FRA_DIR=$WRK_DIR/Frameworks
 
 ### use TMP_DIR for everything temporary #######################################
 

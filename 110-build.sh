@@ -42,7 +42,7 @@ configure_make_makeinstall
 get_source $URL_OPENSSL
 
 # OpenSSL needs special treatment to configure correctly for an alternate SDK.
-./config --prefix=$OPT_DIR -mmacosx-version-min=$MACOSX_DEPLOYMENT_TARGET
+./config --prefix=$WRK_DIR -mmacosx-version-min=$MACOSX_DEPLOYMENT_TARGET
 
 (
   unset MAKEFLAGS    # revoke multi-core compilation
@@ -90,7 +90,7 @@ get_source $URL_PYTHON
   "
   configure_make_makeinstall "\
     --enable-framework=$FRA_DIR\
-    --with-openssl=$OPT_DIR\
+    --with-openssl=$WRK_DIR\
     --enable-optimizations\
     " "" "PYTHONAPPSDIR=$TMP_DIR"
 

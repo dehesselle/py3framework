@@ -7,6 +7,6 @@ function configure_make_makeinstall
   local make_flags="$2"
   local make_install_flags="$3"
 
-  ./configure --prefix=$OPT_DIR $configure_flags
+  ./configure --prefix=$WRK_DIR $configure_flags
   make_makeinstall "$make_flags" "$make_install_flags"
 }
