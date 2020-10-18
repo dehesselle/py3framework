@@ -8,7 +8,7 @@ Although you can download an official Python 3 framework build from https://www.
 
 ### Prerequisites
 
-It's best to use a recent version of Xcode along with the 10.9 SDK to achieve broad backward compatiblity.  
+It's best to use a recent version of Xcode along with the 10.11 SDK to achieve broad backward compatiblity.  
 You can get older SDKs from older versions of Xcode (check the downloads section in your Apple Developer account) or use little helpers like [XcodeLegacy](https://github.com/devernay/xcodelegacy).
 
 ### Instructions
@@ -20,7 +20,7 @@ You can get older SDKs from older versions of Xcode (check the downloads section
   WRK_DIR=/Users/Shared/work/py3framework
 
   # line 56: target platform
-  export MACOSX_DEPLOYMENT_TARGET=10.9   # OS X Mavericks
+  export MACOSX_DEPLOYMENT_TARGET=10.11   # OS X El Capitan
 
   # line 57: parent folder containing your MacOSX*.sdk
   [ -z $SDKROOT_DIR ] && SDKROOT_DIR=/opt/sdks
