@@ -32,7 +32,7 @@ export PIPENV_CACHE_DIR=$TMP_DIR/pipenv     # instead ~/Library/Caches/pipenv
 
 PY3_MAJOR=3
 PY3_MINOR=8
-PY3_PATCH=5
+PY3_PATCH=6
 
 ### Python.framework directories ###############################################
 
@@ -66,7 +66,7 @@ export SDKROOT=$SDKROOT_DIR/MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk
 URL_GETTEXT=https://ftp.halifax.rwth-aachen.de/gnu/gettext/gettext-0.21.tar.xz
 URL_ICONV=https://ftp.halifax.rwth-aachen.de/gnu/libiconv/libiconv-1.16.tar.gz
 URL_LIBXML2=ftp://xmlsoft.org/libxml2/libxml2-2.9.10.tar.gz
-URL_OPENSSL=https://www.openssl.org/source/openssl-1.1.1g.tar.gz
+URL_OPENSSL=https://www.openssl.org/source/openssl-1.1.1h.tar.gz
 URL_PYTHON=https://www.python.org/ftp/python/$PY3_MAJOR.$PY3_MINOR.$PY3_PATCH/Python-$PY3_MAJOR.$PY3_MINOR.$PY3_PATCH.tar.xz
 URL_READLINE=https://ftp.halifax.rwth-aachen.de/gnu/readline/readline-8.0.tar.gz
 URL_XZUTILS=https://tukaani.org/xz/xz-5.2.5.tar.xz
