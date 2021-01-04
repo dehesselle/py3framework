@@ -8,6 +8,7 @@
 INCLUDE_DIR=$SELF_DIR/bash_d
 source $INCLUDE_DIR/1_include_.sh
 include_file echo_.sh
+include_file error_.sh
 
 # Include custom functions.
 

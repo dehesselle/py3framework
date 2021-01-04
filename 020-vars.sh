@@ -3,11 +3,21 @@
 
 [ -z $VARS_INCLUDED ] && VARS_INCLUDED=true || return   # include guard
 
-### build directories ##########################################################
+### directories: self ##########################################################
+
+# The fully qualified directory name in canonicalized form.
+
+# The script magic here is is a replacement for GNU's "readlink -f".
+SELF_DIR=$(F=$0; while [ ! -z $(readlink $F) ] && F=$(readlink $F); \
+  cd $(dirname $F); F=$(basename $F); [ -L $F ]; do :; done; echo $(pwd -P))
+
+### directories: work ##########################################################
 
 if [ -z $WRK_DIR ]; then
   WRK_DIR=/Users/Shared/work/py3framework
 fi
+
+### directories: FSH-like tree below work ######################################
 
 SRC_DIR=$WRK_DIR/src
 TMP_DIR=$WRK_DIR/tmp
@@ -15,7 +25,7 @@ LIB_DIR=$WRK_DIR/lib
 INC_DIR=$WRK_DIR/include
 FRA_DIR=$WRK_DIR/Frameworks
 
-### use TMP_DIR for everything temporary #######################################
+### directories: temporary locations ###########################################
 
 export TMP=$TMP_DIR
 export TEMP=$TMP_DIR
@@ -62,15 +72,14 @@ export SDKROOT=$SDKROOT_DIR/MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk
 ### download URLs ##############################################################
 
 URL_GNU_MIRROR=https://ftp.halifax.rwth-aachen.de/gnu
-URL_GNU_MIRROR=https://ftp.fau.de/gnu
 
 # Python $PY3_MAJOR.$PY3_MINOR.$PY3_PATCH and latest "everything else"
 
 URL_GETTEXT=$URL_GNU_MIRROR/gettext/gettext-0.21.tar.xz
 URL_ICONV=$URL_GNU_MIRROR/libiconv/libiconv-1.16.tar.gz
 URL_LIBXML2=ftp://xmlsoft.org/libxml2/libxml2-2.9.10.tar.gz
-URL_OPENSSL=https://www.openssl.org/source/openssl-1.1.1h.tar.gz
+URL_OPENSSL=https://www.openssl.org/source/openssl-1.1.1i.tar.gz
 URL_PYTHON=https://www.python.org/ftp/python/$PY3_MAJOR.$PY3_MINOR.$PY3_PATCH/Python-$PY3_MAJOR.$PY3_MINOR.$PY3_PATCH.tar.xz
-URL_READLINE=$URL_GNU_MIRROR/readline/readline-8.0.tar.gz
+URL_READLINE=$URL_GNU_MIRROR/readline/readline-8.1.tar.gz
 URL_XZUTILS=https://tukaani.org/xz/xz-5.2.5.tar.xz
 URL_ZLIB=https://zlib.net/zlib-1.2.11.tar.gz
