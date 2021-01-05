@@ -14,10 +14,12 @@ error_trace_enable
 
 get_source $URL_OPENSSL
 
-# OpenSSL needs special treatment to configure correctly for an alternate SDK.
-./config --prefix=$WRK_DIR -mmacosx-version-min=$MACOSX_DEPLOYMENT_TARGET
+if [ ! -z $MACOSX_DEPLOYMENT_TARGET ]; then
+  # OpenSSL needs special treatment to target alternative platforms.
+  MMACOSX_VERSION_MIN=-mmacosx-version-min=$MACOSX_DEPLOYMENT_TARGET
+fi
 
-(
-  unset MAKEFLAGS    # revoke multi-core compilation
-  make_makeinstall
-)
+./config --prefix=$WRK_DIR $MMACOSX_VERSION_MIN
+
+unset MAKEFLAGS    # revoke multi-core compilation
+make_makeinstall

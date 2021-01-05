@@ -13,7 +13,7 @@ fi
 
 ### check if SDK present #######################################################
 
-if [ ! -f $SDKROOT/SDKSettings.plist ]; then
+if [ ! -z $SDKROOT ] && [ ! -f $SDKROOT/SDKSettings.plist ]; then
   echo_e "SDK not found: $SDKROOT"
   exit 1
 fi

@@ -63,11 +63,12 @@ export CXXFLAGS=-I$INC_DIR
 export LDFLAGS=-L$LIB_DIR
 
 # FYI: Python and OpenSSL have problems with mutli-core compilation
-export MAKEFLAGS=-j$(sysctl -n hw.ncpu)  # use all available cores
+export MAKEFLAGS=-j$(/usr/sbin/sysctl -n hw.ncpu)  # use all available cores
 
-export MACOSX_DEPLOYMENT_TARGET=10.11   # OS X El Capitan
-[ -z $SDKROOT_DIR ] && SDKROOT_DIR=/opt/sdks
-export SDKROOT=$SDKROOT_DIR/MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk
+if [ ! -z $SDKROOT ]; then  # if set, use deployment target from SDK
+  export SDKROOT
+  export MACOSX_DEPLOYMENT_TARGET=$(/usr/libexec/PlistBuddy -c "Print :DefaultProperties:MACOSX_DEPLOYMENT_TARGET" $SDKROOT/SDKSettings.plist)
+fi
 
 ### download URLs ##############################################################
 
