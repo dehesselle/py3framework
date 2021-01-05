@@ -1,5 +1,6 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
 # This file is part of https://github.com/dehesselle/py3framework
-# Licensed under GPLv3.
 
 [ -z $FUNCS_INCLUDED ] && FUNCS_INCLUDED=true || return   # include guard
 
