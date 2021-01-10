@@ -2,11 +2,11 @@
 #
 # This file is part of https://github.com/dehesselle/py3framework
 
-name: build Python framework for Inkscape
+name: build_inkscape
 on: [push]
 
 jobs:
-  build:
+  python_framework:
     runs-on: macos-10.15
     env:
       WRK_DIR: ${{ github.workspace }}/work
@@ -36,29 +36,22 @@ jobs:
 
     ### build ##################################################################
 
-    - name: build libiconv
-      run: ./110-build_iconv.sh
-    - name: build zlib
-      run: ./120-build_zlib.sh
-    - name: build OpenSSL
-      run: ./130-build_openssl.sh
-    - name: build GNU readline
-      run: ./140-build_readline.sh
-    - name: build GNU gettext
-      run: ./150-build_gettext.sh
-    - name: build XZ utils (lzma)
-      run: ./160-build_lzma.sh
+    - name: build dependencies
+      uses: ./build-dependencies
+
     - name: build Python
       run: ./210a-build_python.sh
+
     - name: build Libxml2
       run: ./220-build_libxml2.sh
+
     - name: package Python framework
       run: ./310-package_framework.sh
 
     ### artifact ###############################################################
 
     - name: create archive
-      run: tar -C $WRK_DIR/Frameworks -cJf $GITHUB_WORKSPACE/Python.framework.inkscape.tar.xz Python.framework
+      run: tar -C $WRK_DIR/Frameworks -c Python.framework | xz -T 0 >$GITHUB_WORKSPACE/Python.framework.inkscape.tar.xz
 
     - name: upload archive
       uses: actions/upload-artifact@v2

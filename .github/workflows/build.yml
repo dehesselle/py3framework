@@ -2,17 +2,79 @@
 #
 # This file is part of https://github.com/dehesselle/py3framework
 
-name: build Python framework
+name: build
 on: [push]
 
 jobs:
-  build:
+
+################################################################################
+
+  dependencies:
     runs-on: macos-10.15
     env:
       WRK_DIR: ${{ github.workspace }}/work
     steps:
 
     ### preparations ###########################################################
+
+    - id: cache
+      uses: actions/cache@v2
+      env:
+        CACHE_NAME: cache-dependencies
+        CACHE_KEY: ${{ env.CACHE_NAME }}-${{ hashFiles('0??-*.sh','1??-*.sh') }}
+      with:
+        path: ${{ env.WRK_DIR }}
+        key: ${{ env.CACHE_KEY }}
+
+    # make build environment pristine
+    - name: clear /usr/local
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: sudo rm -rf /usr/local/*
+
+    - name: checkout repository
+      if: steps.cache.outputs.cache-hit != 'true'
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    # GitHub does not provide the 10.11 SDK (from Xcode 7.3.1). There is no
+    # official public download available from Apple and I don't trust 3rd
+    # party sources (e.g. "phracker"), so I'm using my own source.
+    - name: install MacOSX10.11.sdk (if secret is set)
+      env:
+        SDK1011_DOWNLOAD_URL: ${{ secrets.SDK1011_DOWNLOAD_URL }}
+      if: |
+          steps.cache.outputs.cache-hit != 'true' &&
+          env.SDK1011_DOWNLOAD_URL != null
+      run:  |
+            curl -L ${{ secrets.SDK1011_DOWNLOAD_URL }} | tar xJp
+            echo "SDKROOT=$GITHUB_WORKSPACE/$(basename -s .tar.xz ${{ secrets.SDK1011_DOWNLOAD_URL }})"
+
+    ### build ##################################################################
+
+    - name: build dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
+      uses: ./build-dependencies
+
+################################################################################
+
+  python:
+    runs-on: macos-10.15
+    env:
+      WRK_DIR: ${{ github.workspace }}/work
+    needs: dependencies   # due to this, the cache below is expected to always be there
+    steps:
+
+    ### preparations ###########################################################
+
+    - id: cache
+      uses: actions/cache@v2
+      env:
+        CACHE_NAME: cache-dependencies
+        CACHE_KEY: ${{ env.CACHE_NAME }}-${{ hashFiles('0??-*.sh','1??-*.sh') }}
+      with:
+        path: ${{ env.WRK_DIR }}
+        key: ${{ env.CACHE_KEY }}
 
     # make build environment pristine
     - name: clear /usr/local
@@ -29,39 +91,44 @@ jobs:
     - name: install MacOSX10.11.sdk (if secret is set)
       env:
         SDK1011_DOWNLOAD_URL: ${{ secrets.SDK1011_DOWNLOAD_URL }}
-      if: env.SDK1011_DOWNLOAD_URL != null   # run if secret exists
+      if: env.SDK1011_DOWNLOAD_URL != null
       run:  |
             curl -L ${{ secrets.SDK1011_DOWNLOAD_URL }} | tar xJp
-            echo "SDKROOT=$GITHUB_WORKSPACE/$(basename -s .tar.xz ${{ secrets.SDK1011_DOWNLOAD_URL }})"
+            echo "SDKROOT=$GITHUB_WORKSPACE/$(basename -s .tar.xz ${{ secrets.SDK1011_DOWNLOAD_URL }})" >> $GITHUB_ENV
 
-    ### build ##################################################################
+    ### build: Python ##########################################################
 
-    - name: build libiconv
-      run: ./110-build_iconv.sh
-    - name: build zlib
-      run: ./120-build_zlib.sh
-    - name: build OpenSSL
-      run: ./130-build_openssl.sh
-    - name: build GNU readline
-      run: ./140-build_readline.sh
-    - name: build GNU gettext
-      run: ./150-build_gettext.sh
-    - name: build XZ utils (lzma)
-      run: ./160-build_lzma.sh
     - name: build Python
       run: ./210-build_python.sh
+
     - name: build Libxml2
       run: ./220-build_libxml2.sh
+
     - name: package Python framework
       run: ./310-package_framework.sh
 
-    ### artifact ###############################################################
+    ### artifact: Python #######################################################
 
-    - name: create archive
-      run: tar -C $WRK_DIR/Frameworks -cJf $GITHUB_WORKSPACE/Python.framework.tar.xz Python.framework
+    - name: create Python archive
+      run: tar -C $WRK_DIR/Frameworks -c Python.framework | xz -T 0 >$GITHUB_WORKSPACE/Python.framework.tar.xz
 
-    - name: upload archive
+    - name: upload Python archive
       uses: actions/upload-artifact@v2
       with:
         name: Python framework
         path: ${{ github.workspace }}/Python.framework.tar.xz
+
+    ### build: lxml ############################################################
+
+    - name: build lxml wheel
+      run: ./410-build_lxml_wheel.sh
+
+    ### artifact: lxml #########################################################
+
+    - name: upload lxml wheel
+      uses: actions/upload-artifact@v2
+      with:
+        name: Python framework
+        path: ${{ env.WRK_DIR }}/lxml-4.5.2-cp38-cp38-macosx_10_11_x86_64.whl  # TODO: make variable
+
+################################################################################
