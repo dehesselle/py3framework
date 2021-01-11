@@ -31,9 +31,11 @@ jobs:
         key: ${{ env.CACHE_NAME }}-${{ hashFiles('0??-*.sh','1??-*.sh') }}
 
     # make build environment pristine
-    - name: clear /usr/local
+    - name: shadow /usr/local
       if: steps.cache.outputs.cache-hit != 'true'
-      run: sudo rm -rf /usr/local/*
+      run:  |
+            sudo mkdir /usr/local/disabled
+            find /usr/local -mindepth 1 -maxdepth 1 -type d ! -name disabled -exec sudo mv {} /usr/local/disabled \;
 
     # GitHub does not provide the 10.11 SDK (from Xcode 7.3.1). There is no
     # official public download available from Apple and I don't trust 3rd
