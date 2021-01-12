@@ -9,6 +9,7 @@ function get_compressor_flag
 
   case $extension in
     gz)  echo "z" ;;
+    tgz) echo "z" ;;
     bz2) echo "j" ;;
     xz)  echo "J" ;;
     *)   echo_e "unknown extension $extension" >&2

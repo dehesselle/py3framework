@@ -15,7 +15,6 @@ error_trace_enable
 
 get_source $URL_PYTHON
 
-unset MAKEFLAGS    # revoke multi-core compilation
 export CFLAGS="\
   $CFLAGS \
   -I$SDKROOT/System/Library/Frameworks/Tk.framework/Versions/Current/Headers\

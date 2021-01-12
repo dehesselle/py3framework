@@ -18,7 +18,6 @@ get_source $URL_PYTHON
 # use ~/Library/Caches/org.inkscape.Inkscape for PYTHONPYCACHEPREFIX
 patch -p1 < $GITHUB_WORKSPACE/hardcode_pycache_prefix.patch
 
-unset MAKEFLAGS    # revoke multi-core compilation
 export CFLAGS="\
   $CFLAGS \
   -I$SDKROOT/System/Library/Frameworks/Tk.framework/Versions/Current/Headers\

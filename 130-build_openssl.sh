@@ -22,5 +22,4 @@ fi
 
 ./config --prefix=$WRK_DIR $MMACOSX_VERSION_MIN
 
-unset MAKEFLAGS    # revoke multi-core compilation
 make_makeinstall
