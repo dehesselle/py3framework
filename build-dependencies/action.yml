@@ -7,22 +7,23 @@ runs:
       run: ./110-build_iconv.sh
       shell: bash
 
-    - name: build zlib
-      run: ./120-build_zlib.sh
-      shell: bash
-
-    - name: build OpenSSL
-      run: ./130-build_openssl.sh
-      shell: bash
-
-    - name: build GNU readline
-      run: ./140-build_readline.sh
-      shell: bash
-
-    - name: build GNU gettext
-      run: ./150-build_gettext.sh
-      shell: bash
-
-    - name: build XZ utils (lzma)
-      run: ./160-build_lzma.sh
-      shell: bash
+#    - name: build zlib
+#      run: ./120-build_zlib.sh
+#      shell: bash
+#
+#    - name: build OpenSSL
+#      run: ./130-build_openssl.sh
+#      shell: bash
+#
+#    - name: build GNU readline
+#      run: ./140-build_readline.sh
+#      shell: bash
+#
+#    - name: build GNU gettext
+#      run: ./150-build_gettext.sh
+#      shell: bash
+#
+#    - name: build XZ utils (lzma)
+#      run: ./160-build_lzma.sh
+#      shell: bash
+#
