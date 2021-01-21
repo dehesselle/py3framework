@@ -13,7 +13,10 @@ error_trace_enable
 
 ### install gettext ############################################################
 
-get_source $URL_GETTEXT
+GETTEXT_VER=0.21
+GETTEXT_URL=https://ftp.halifax.rwth-aachen.de/gnu/gettext/gettext-$GETTEXT_VER.tar.xz
+
+get_source $GETTEXT_URL
 configure_make_makeinstall "\
   --disable-csharp\
   --without-emacs\

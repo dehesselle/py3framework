@@ -13,5 +13,8 @@ error_trace_enable
 
 ### install lzma ###############################################################
 
-get_source $URL_XZUTILS
+XZUTILS_VER=5.2.5
+XZUTILS_URL=https://tukaani.org/xz/xz-$XZUTILS_VER.tar.gz
+
+get_source $XZUTILS_URL
 configure_make_makeinstall

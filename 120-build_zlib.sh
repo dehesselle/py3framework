@@ -13,5 +13,8 @@ error_trace_enable
 
 ### install zlib ###############################################################
 
-get_source $URL_ZLIB
+ZLIB_VER=1.2.11
+ZLIB_URL=https://zlib.net/zlib-$ZLIB_VER.tar.gz
+
+get_source $ZLIB_URL
 configure_make_makeinstall

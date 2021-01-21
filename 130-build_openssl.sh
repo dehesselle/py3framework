@@ -13,7 +13,10 @@ error_trace_enable
 
 ### install OpenSSL ############################################################
 
-get_source $URL_OPENSSL
+OPENSSL_VER=1.1.1i
+OPENSSL_URL=https://www.openssl.org/source/openssl-$OPENSSL_VER.tar.gz
+
+get_source $OPENSSL_URL
 
 if [ ! -z $MACOSX_DEPLOYMENT_TARGET ]; then
   # OpenSSL needs special treatment to target alternative platforms.

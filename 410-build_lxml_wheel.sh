@@ -11,17 +11,16 @@ for script in $SELF_DIR/0??-*.sh; do source $script; done
 include_file echo_.sh
 include_file error_.sh
 
-### additional settings ########################################################
+### build lxml #################################################################
 
-PYTHON_LXML_SRC=https://lxml.de/files/lxml-4.5.2.tgz
-
-### build wheels ###############################################################
+LXML_VER=4.5.2
+LXML_URL=https://lxml.de/files/lxml-$LXML_VER.tgz
 
 export PATH=$WRK_DIR/Frameworks/Python.framework/Versions/Current/bin:$PATH
 
 pip3 install wheel
 
-get_source $PYTHON_LXML_SRC
+get_source $LXML_URL
 
 python3 setup.py bdist_wheel \
   --plat-name macosx_${MACOSX_DEPLOYMENT_TARGET/./_}_x86_64 \

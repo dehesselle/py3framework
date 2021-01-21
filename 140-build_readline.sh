@@ -13,5 +13,8 @@ error_trace_enable
 
 ### install readline ###########################################################
 
-get_source $URL_READLINE
+READLINE_VER=8.1
+READLINE_URL=https://ftp.halifax.rwth-aachen.de/gnu/readline/readline-$READLINE_VER.tar.gz
+
+get_source $READLINE_URL
 configure_make_makeinstall

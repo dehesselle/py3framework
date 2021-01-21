@@ -13,7 +13,10 @@ error_trace_enable
 
 ### install Libxml2 ############################################################
 
-get_source $URL_LIBXML2
+LIBXML2_VER=2.9.10
+LIBXML2_URL=ftp://xmlsoft.org/libxml2/libxml2-$LIBXML2_VER.tar.gz
+
+get_source $LIBXML2_URL
 
 (
   export PATH=$PY3_FRA_BIN_DIR:$PATH   # so libxml2 finds python3.8-config
