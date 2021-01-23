@@ -1,5 +1,5 @@
---- Python-3.8.5/Python/initconfig.c	2020-07-20 15:01:32.000000000 +0200
-+++ /Users/rene/Developer/py3framework/initconfig.c	2020-09-06 12:13:16.000000000 +0200
+--- a/Python/initconfig.c	2020-07-20 15:01:32.000000000 +0200
++++ b/Python/initconfig.c	2020-09-06 12:13:16.000000000 +0200
 @@ -1393,26 +1393,13 @@
  {
      assert(config->pycache_prefix == NULL);

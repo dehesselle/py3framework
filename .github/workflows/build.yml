@@ -111,5 +111,5 @@ jobs:
 
     ### statistics #############################################################
 
-    - name: ccache statistics
+    - name: print ccache statistics
       run: $WRK_DIR/bin/ccache -s
