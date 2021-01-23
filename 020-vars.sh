@@ -20,6 +20,7 @@ fi
 
 ### directories: FSH-like tree below work ######################################
 
+BIN_DIR=$WRK_DIR/bin
 SRC_DIR=$WRK_DIR/src
 TMP_DIR=$WRK_DIR/tmp
 LIB_DIR=$WRK_DIR/lib
@@ -35,6 +36,16 @@ export XDG_CACHE_HOME=$TMP_DIR/xdgcache     # instead ~/.cache
 export XDG_CONFIG_HOME=$TMP_DIR/xdgconfig   # instead ~/.config
 export PIP_CACHE_DIR=$TMP_DIR/pip           # instead ~/Library/Caches/pip
 export PIPENV_CACHE_DIR=$TMP_DIR/pipenv     # instead ~/Library/Caches/pipenv
+
+### directories: ccache ########################################################
+
+if [ -z $CCACHE_DIR ]; then
+  export CCACHE_DIR=$WRK_DIR/ccache
+fi
+
+### directories: set PATH ######################################################
+
+export PATH=$BIN_DIR:/usr/bin:/bin:/usr/sbin:/sbin
 
 ### Python version #############################################################
 
@@ -62,6 +73,27 @@ PY3_FRA_LIB=$PY3_FRA_VER_PY3_DIR/Python
 export CFLAGS=-I$INC_DIR
 export CXXFLAGS=-I$INC_DIR
 export LDFLAGS=-L$LIB_DIR
+
+CC=$BIN_DIR/gcc
+if [ -x $CC ]; then
+  export CC
+else
+  unset CC
+fi
+
+OBJC=$BIN_DIR/gcc
+if [ -x $OBJC ]; then
+  export OBJC
+else
+  unset OBJC
+fi
+
+CXX=$BIN_DIR/g++
+if [ -x $CXX ]; then
+  export CXX
+else
+  unset CXX
+fi
 
 if [ ! -z $SDKROOT ]; then  # if set, use deployment target from SDK
   export SDKROOT

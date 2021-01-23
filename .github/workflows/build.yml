@@ -9,33 +9,33 @@ jobs:
 
 ################################################################################
 
-  dependencies:
+  python:
     runs-on: macos-10.15
     env:
-      WRK_DIR: ${{ github.workspace }}/work
+      WRK_DIR: /Users/Shared/work
+      CCACHE_DIR: /Users/Shared/work/ccache
     steps:
 
-    ### preparations ###########################################################
+    ### prepare ################################################################
 
     - name: checkout repository
       uses: actions/checkout@v2
       with:
         submodules: true
 
-    - id: cache
-      uses: actions/cache@v2
-      env:
-        CACHE_NAME: cache-dependencies
+    - name: create timestamp
+      id: time
+      uses: nanzm/get-time-action@v1.1
       with:
-        path: ${{ env.WRK_DIR }}
-        key: ${{ env.CACHE_NAME }}-${{ hashFiles('0??-*.sh','1??-*.sh') }}
+        format: "YYYY-MM-DD-HH-mm-ss"
 
-#    # make build environment pristine
-#    - name: move contents in /usr/local away
-#      if: steps.cache.outputs.cache-hit != 'true'
-#      run:  |
-#            sudo mkdir /usr/local/disabled
-#            find /usr/local -mindepth 1 -maxdepth 1 -type d ! -name disabled -exec sudo mv {} /usr/local/disabled \;
+    - name: populate CCACHE_DIR
+      id: cache
+      uses: actions/cache@v2
+      with:
+        path: ${{ env.CCACHE_DIR }}
+        key: ccache-${{ steps.time.outputs.time }}
+        restore-keys: ccache-
 
     # GitHub does not provide the 10.11 SDK (from Xcode 7.3.1). There is no
     # official public download available from Apple and I don't trust 3rd
@@ -43,77 +43,34 @@ jobs:
     - name: install MacOSX10.11.sdk (if secret is set)
       env:
         SDK1011_DOWNLOAD_URL: ${{ secrets.SDK1011_DOWNLOAD_URL }}
-      if: |
-          steps.cache.outputs.cache-hit != 'true' &&
-          env.SDK1011_DOWNLOAD_URL != null
+      if: env.SDK1011_DOWNLOAD_URL != null
       run:  |
-            mkdir $WRK_DIR
+            mkdir -p $WRK_DIR
             curl -L ${{ secrets.SDK1011_DOWNLOAD_URL }} | tar -C $WRK_DIR -xJp
             echo "SDKROOT=$WRK_DIR/$(basename ${SDK1011_DOWNLOAD_URL%%.tar.xz*})" >> $GITHUB_ENV
 
-    ### build ##################################################################
+    ### build: Python ##########################################################
+
+    - name: build ccache
+      run: ./105-build_ccache.sh
 
     - name: build libiconv
-      if: steps.cache.outputs.cache-hit != 'true'
       run: ./110-build_iconv.sh
-      shell: bash
 
     - name: build zlib
-      if: steps.cache.outputs.cache-hit != 'true'
       run: ./120-build_zlib.sh
-      shell: bash
 
     - name: build OpenSSL
-      if: steps.cache.outputs.cache-hit != 'true'
       run: ./130-build_openssl.sh
-      shell: bash
 
     - name: build GNU readline
-      if: steps.cache.outputs.cache-hit != 'true'
       run: ./140-build_readline.sh
-      shell: bash
 
     - name: build GNU gettext
-      if: steps.cache.outputs.cache-hit != 'true'
       run: ./150-build_gettext.sh
-      shell: bash
 
     - name: build XZ utils (lzma)
-      if: steps.cache.outputs.cache-hit != 'true'
       run: ./160-build_lzma.sh
-      shell: bash
-
-###############################################################################
-
-  python:
-    runs-on: macos-10.15
-    env:
-      WRK_DIR: ${{ github.workspace }}/work
-    needs: dependencies   # due to this, the cache below is expected to always be there
-    steps:
-
-    ### preparations ###########################################################
-
-    - name: checkout repository
-      uses: actions/checkout@v2
-      with:
-        submodules: true
-
-    - id: cache
-      uses: actions/cache@v2
-      env:
-        CACHE_NAME: cache-dependencies
-      with:
-        path: ${{ env.WRK_DIR }}
-        key: ${{ env.CACHE_NAME }}-${{ hashFiles('0??-*.sh','1??-*.sh') }}
-
-    - name: enable MacOSX10.11.sdk (if secret is set)
-      env:
-        SDK1011_DOWNLOAD_URL: ${{ secrets.SDK1011_DOWNLOAD_URL }}
-      if:  env.SDK1011_DOWNLOAD_URL != null
-      run: echo "SDKROOT=$WRK_DIR/$(basename ${SDK1011_DOWNLOAD_URL%%.tar.xz*})" >> $GITHUB_ENV
-
-    ### build: Python ##########################################################
 
     - name: build Python
       run: ./210-build_python.sh
@@ -142,60 +99,12 @@ jobs:
 
     ### artifact: lxml #########################################################
 
+    - name: get wheel name
+      id: lxml_wheel
+      run: echo "::set-output name=file::$(echo $WRK_DIR/lxml-*.whl)"
+
     - name: upload lxml wheel
       uses: actions/upload-artifact@v2
       with:
-        name: Python framework
-        path: ${{ env.WRK_DIR }}/lxml-4.5.2-cp38-cp38-macosx_10_11_x86_64.whl  # TODO: make variable
-
-################################################################################
-
-  python_inkscape:
-    runs-on: macos-10.15
-    env:
-      WRK_DIR: ${{ github.workspace }}/work
-    needs: dependencies   # due to this, the cache below is expected to always be there
-    steps:
-
-    ### preparations ###########################################################
-
-    - name: checkout repository
-      uses: actions/checkout@v2
-      with:
-        submodules: true
-
-    - id: cache
-      uses: actions/cache@v2
-      env:
-        CACHE_NAME: cache-dependencies
-      with:
-        path: ${{ env.WRK_DIR }}
-        key: ${{ env.CACHE_NAME }}-${{ hashFiles('0??-*.sh','1??-*.sh') }}
-
-    - name: enable MacOSX10.11.sdk (if secret is set)
-      env:
-        SDK1011_DOWNLOAD_URL: ${{ secrets.SDK1011_DOWNLOAD_URL }}
-      if:  env.SDK1011_DOWNLOAD_URL != null
-      run: echo "SDKROOT=$WRK_DIR/$(basename ${SDK1011_DOWNLOAD_URL%%.tar.xz*})" >> $GITHUB_ENV
-
-    ### build ##################################################################
-
-    - name: build Python
-      run: ./210a-build_python.sh
-
-    - name: build Libxml2
-      run: ./220-build_libxml2.sh
-
-    - name: package Python framework
-      run: ./310-package_framework.sh
-
-    ### artifact ###############################################################
-
-    - name: create archive
-      run: tar -C $WRK_DIR/Frameworks -c Python.framework | xz -T 0 >$GITHUB_WORKSPACE/Python.framework.inkscape.tar.xz
-
-    - name: upload archive
-      uses: actions/upload-artifact@v2
-      with:
-        name: Python framework for Inkscape
-        path: ${{ github.workspace }}/Python.framework.inkscape.tar.xz
+        name: lxml wheel
+        path: ${{ steps.lxml_wheel.outputs.file }}
