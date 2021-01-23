@@ -2,14 +2,14 @@
 #
 # This file is part of https://github.com/dehesselle/py3framework
 
-name: build
+name: build_inkscape
 on: [push]
 
 jobs:
 
 ################################################################################
 
-  python:
+  python_inkscape:
     runs-on: macos-10.15
     env:
       WRK_DIR: /Users/Shared/work
@@ -73,7 +73,7 @@ jobs:
       run: ./170-build_lzma.sh
 
     - name: build Python
-      run: ./210-build_python.sh
+      run: ./210a-build_python.sh
 
     - name: build Libxml2
       run: ./220-build_libxml2.sh
@@ -89,25 +89,8 @@ jobs:
     - name: upload Python archive
       uses: actions/upload-artifact@v2
       with:
-        name: Python framework
+        name: Python framework for Inkscape
         path: ${{ github.workspace }}/Python.framework.tar.xz
-
-    ### build: lxml ############################################################
-
-    - name: build lxml wheel
-      run: ./410-build_lxml_wheel.sh
-
-    ### artifact: lxml #########################################################
-
-    - name: get wheel name
-      id: lxml_wheel
-      run: echo "::set-output name=file::$(echo $WRK_DIR/lxml-*.whl)"
-
-    - name: upload lxml wheel
-      uses: actions/upload-artifact@v2
-      with:
-        name: lxml wheel
-        path: ${{ steps.lxml_wheel.outputs.file }}
 
     ### statistics #############################################################
 
