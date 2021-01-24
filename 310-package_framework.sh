@@ -56,12 +56,12 @@ cp $LIB_DIR/libxml2.2.dylib $PY3_FRA_EXT_LIB_DIR
 lib_change_paths \
   @loader_path/../../../Libraries \
   $PY3_FRA_EXT_LIB_DIR \
-  $PY3_FRA_LIB_PY3_DIR/lib-dynload/_hashlib.cpython-$PY3_MAJOR$PY3_MINOR-darwin.so \
-  $PY3_FRA_LIB_PY3_DIR/lib-dynload/_lzma.cpython-$PY3_MAJOR$PY3_MINOR-darwin.so \
-  $PY3_FRA_LIB_PY3_DIR/lib-dynload/_ssl.cpython-$PY3_MAJOR$PY3_MINOR-darwin.so \
-  $PY3_FRA_LIB_PY3_DIR/lib-dynload/binascii.cpython-$PY3_MAJOR$PY3_MINOR-darwin.so \
-  $PY3_FRA_LIB_PY3_DIR/lib-dynload/readline.cpython-$PY3_MAJOR$PY3_MINOR-darwin.so \
-  $PY3_FRA_LIB_PY3_DIR/lib-dynload/zlib.cpython-$PY3_MAJOR$PY3_MINOR-darwin.so \
+  $PY3_FRA_LIB_PY3_DIR/lib-dynload/_hashlib.cpython-${PYTHON_VER/./}-darwin.so \
+  $PY3_FRA_LIB_PY3_DIR/lib-dynload/_lzma.cpython-${PYTHON_VER/./}-darwin.so \
+  $PY3_FRA_LIB_PY3_DIR/lib-dynload/_ssl.cpython-${PYTHON_VER/./}-darwin.so \
+  $PY3_FRA_LIB_PY3_DIR/lib-dynload/binascii.cpython-${PYTHON_VER/./}-darwin.so \
+  $PY3_FRA_LIB_PY3_DIR/lib-dynload/readline.cpython-${PYTHON_VER/./}-darwin.so \
+  $PY3_FRA_LIB_PY3_DIR/lib-dynload/zlib.cpython-${PYTHON_VER/./}-darwin.so \
   $PY3_FRA_LIB_PY3_DIR/site-packages/libxml2mod.so
 
 lib_change_siblings $PY3_FRA_EXT_LIB_DIR
@@ -71,9 +71,9 @@ lib_change_siblings $PY3_FRA_EXT_LIB_DIR
 lib_change_paths \
     @executable_path/.. \
     $(dirname $PY3_FRA_LIB) \
-    $PY3_FRA_BIN_DIR/python$PY3_MAJOR.$PY3_MINOR
+    $PY3_FRA_BIN_DIR/python$PYTHON_VER
 
-chmod 755 $PY3_FRA_BIN_DIR/python$PY3_MAJOR.$PY3_MINOR
+chmod 755 $PY3_FRA_BIN_DIR/python$PYTHON_VER
 
 ### change link paths in Python.app ############################################
 
@@ -97,19 +97,19 @@ lib_change_paths @loader_path/Libraries $PY3_FRA_EXT_LIB_DIR $PY3_FRA_LIB
 # The linebreaks are intentional: this is the way to insert newlines with
 # this version of 'sed'.
 
-sed -i '' "1s/.*/#!\/usr\/bin\/env python$PY3_MAJOR.$PY3_MINOR\
-/" $PY3_FRA_BIN_DIR/2to3-$PY3_MAJOR.$PY3_MINOR
-sed -i '' "1s/.*/#!\/usr\/bin\/env python$PY3_MAJOR.$PY3_MINOR\
-/" $PY3_FRA_BIN_DIR/easy_install-$PY3_MAJOR.$PY3_MINOR
-sed -i '' "1s/.*/#!\/usr\/bin\/env python$PY3_MAJOR.$PY3_MINOR\
-/" $PY3_FRA_BIN_DIR/idle$PY3_MAJOR.$PY3_MINOR
-sed -i '' "1s/.*/#!\/usr\/bin\/env python$PY3_MAJOR.$PY3_MINOR\
-/" $PY3_FRA_BIN_DIR/pip$PY3_MAJOR.$PY3_MINOR
-sed -i '' "1s/.*/#!\/usr\/bin\/env python$PY3_MAJOR.$PY3_MINOR\
-/" $PY3_FRA_BIN_DIR/pydoc$PY3_MAJOR.$PY3_MINOR
-sed -i '' "1s/.*/#!\/usr\/bin\/env python$PY3_MAJOR.$PY3_MINOR\
-/" $PY3_FRA_BIN_DIR/python$PY3_MAJOR.${PY3_MINOR}-config
+sed -i '' "1s/.*/#!\/usr\/bin\/env python$PYTHON_VER\
+/" $PY3_FRA_BIN_DIR/2to3-$PYTHON_VER
+sed -i '' "1s/.*/#!\/usr\/bin\/env python$PYTHON_VER\
+/" $PY3_FRA_BIN_DIR/easy_install-$PYTHON_VER
+sed -i '' "1s/.*/#!\/usr\/bin\/env python$PYTHON_VER\
+/" $PY3_FRA_BIN_DIR/idle$PYTHON_VER
+sed -i '' "1s/.*/#!\/usr\/bin\/env python$PYTHON_VER\
+/" $PY3_FRA_BIN_DIR/pip$PYTHON_VER
+sed -i '' "1s/.*/#!\/usr\/bin\/env python$PYTHON_VER\
+/" $PY3_FRA_BIN_DIR/pydoc$PYTHON_VER
+sed -i '' "1s/.*/#!\/usr\/bin\/env python$PYTHON_VER\
+/" $PY3_FRA_BIN_DIR/python$PYTHON_VER-config
 
-# turn 'pip3' into a symlink to 'pip$PY3_MAJOR.$PY3_MINOR'
+# turn 'pip3' into a symlink to 'pip$PYTHON_VER'
 cd $PY3_FRA_BIN_DIR
-ln -sf pip$PY3_MAJOR.$PY3_MINOR pip3
+ln -sf pip$PYTHON_VER pip3

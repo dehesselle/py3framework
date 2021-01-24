@@ -13,7 +13,7 @@ error_trace_enable
 
 ### build Python ###############################################################
 
-get_source $URL_PYTHON
+get_source $PYTHON_URL
 
 export CFLAGS="\
   $CFLAGS \

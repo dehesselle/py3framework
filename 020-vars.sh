@@ -14,6 +14,8 @@ SELF_DIR=$(F=$0; while [ ! -z $(readlink $F) ] && F=$(readlink $F); \
 
 ### directories: work ##########################################################
 
+# This is our "root" where all action takes place below.
+
 if [ -z $WRK_DIR ]; then
   WRK_DIR=/Users/Shared/work/py3framework
 fi
@@ -32,8 +34,12 @@ FRA_DIR=$WRK_DIR/Frameworks
 export TMP=$TMP_DIR
 export TEMP=$TMP_DIR
 export TMPDIR=$TMP_DIR
+
+### directories: redirect stuff to temp ########################################
+
 export XDG_CACHE_HOME=$TMP_DIR/xdgcache     # instead ~/.cache
 export XDG_CONFIG_HOME=$TMP_DIR/xdgconfig   # instead ~/.config
+
 export PIP_CACHE_DIR=$TMP_DIR/pip           # instead ~/Library/Caches/pip
 export PIPENV_CACHE_DIR=$TMP_DIR/pipenv     # instead ~/Library/Caches/pipenv
 
@@ -47,23 +53,29 @@ fi
 
 export PATH=$BIN_DIR:/usr/bin:/bin:/usr/sbin:/sbin
 
-### Python version #############################################################
+### Python #####################################################################
 
 # Set the Python version here. All directories and filenames will adapt
 # accordingly using these variables.
 
-PY3_MAJOR=3
-PY3_MINOR=8
-PY3_PATCH=6
+PYTHON_VER_MAJOR=3
+PYTHON_VER_MINOR=8
+PYTHON_VER_PATCH=6
+
+PYTHON_VER=$PYTHON_VER_MAJOR.$PYTHON_VER_MINOR
+PYTHON_VER_FULL=$PYTHON_VER.$PYTHON_VER_PATCH
+
+PYTHON_URL=https://www.python.org/ftp/python/$PYTHON_VER_FULL/\
+Python-$PYTHON_VER_FULL.tar.xz
 
 ### Python.framework directories ###############################################
 
 PY3_FRA_DIR=$FRA_DIR/Python.framework
-PY3_FRA_VER_PY3_DIR=$PY3_FRA_DIR/Versions/$PY3_MAJOR.$PY3_MINOR
+PY3_FRA_VER_PY3_DIR=$PY3_FRA_DIR/Versions/$PYTHON_VER
 PY3_FRA_BIN_DIR=$PY3_FRA_VER_PY3_DIR/bin
 PY3_FRA_EXT_LIB_DIR=$PY3_FRA_VER_PY3_DIR/Libraries
 PY3_FRA_LIB_DIR=$PY3_FRA_VER_PY3_DIR/lib
-PY3_FRA_LIB_PY3_DIR=$PY3_FRA_LIB_DIR/python$PY3_MAJOR.$PY3_MINOR
+PY3_FRA_LIB_PY3_DIR=$PY3_FRA_LIB_DIR/python$PYTHON_VER
 PY3_FRA_RES_DIR=$PY3_FRA_VER_PY3_DIR/Resources
 
 PY3_FRA_LIB=$PY3_FRA_VER_PY3_DIR/Python
@@ -99,7 +111,3 @@ if [ ! -z $SDKROOT ]; then  # if set, use deployment target from SDK
   export SDKROOT
   export MACOSX_DEPLOYMENT_TARGET=$(/usr/libexec/PlistBuddy -c "Print :DefaultProperties:MACOSX_DEPLOYMENT_TARGET" $SDKROOT/SDKSettings.plist)
 fi
-
-### download URLs ##############################################################
-
-URL_PYTHON=https://www.python.org/ftp/python/$PY3_MAJOR.$PY3_MINOR.$PY3_PATCH/Python-$PY3_MAJOR.$PY3_MINOR.$PY3_PATCH.tar.xz

@@ -13,10 +13,10 @@ error_trace_enable
 
 ### build Python ###############################################################
 
-get_source $URL_PYTHON
+get_source $PYTHON_URL
 
 # use ~/Library/Caches/org.inkscape.Inkscape for PYTHONPYCACHEPREFIX
-patch -p1 < $GITHUB_WORKSPACE/hardcode_pycache_prefix.patch
+patch -p1 < $SELF_DIR/hardcode_pycache_prefix.patch
 
 export CFLAGS="\
   $CFLAGS \

@@ -20,5 +20,5 @@ get_source $LIBXML2_URL
 
 (
   export PATH=$PY3_FRA_BIN_DIR:$PATH   # so libxml2 finds python3.8-config
-  configure_make_makeinstall "--with-python=$PY3_FRA_BIN_DIR/python$PY3_MAJOR"
+  configure_make_makeinstall "--with-python=$PY3_FRA_BIN_DIR/python$PYTHON_VER"
 )
