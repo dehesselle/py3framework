@@ -17,7 +17,4 @@ get_source $URL_OPENSSL
 # OpenSSL needs special treatment to configure correctly for an alternate SDK.
 ./config --prefix=$WRK_DIR -mmacosx-version-min=$MACOSX_DEPLOYMENT_TARGET
 
-(
-  unset MAKEFLAGS    # revoke multi-core compilation
-  make_makeinstall
-)
+make_makeinstall
