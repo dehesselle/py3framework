@@ -42,7 +42,7 @@ export PIPENV_CACHE_DIR=$TMP_DIR/pipenv     # instead ~/Library/Caches/pipenv
 
 PY3_MAJOR=3
 PY3_MINOR=8
-PY3_PATCH=6
+PY3_PATCH=9
 
 ### Python.framework directories ###############################################
 
@@ -78,7 +78,7 @@ URL_GNU_MIRROR=https://ftp.halifax.rwth-aachen.de/gnu
 URL_GETTEXT=$URL_GNU_MIRROR/gettext/gettext-0.21.tar.xz
 URL_ICONV=$URL_GNU_MIRROR/libiconv/libiconv-1.16.tar.gz
 URL_LIBXML2=ftp://xmlsoft.org/libxml2/libxml2-2.9.10.tar.gz
-URL_OPENSSL=https://www.openssl.org/source/openssl-1.1.1i.tar.gz
+URL_OPENSSL=https://www.openssl.org/source/openssl-1.1.1k.tar.gz
 URL_PYTHON=https://www.python.org/ftp/python/$PY3_MAJOR.$PY3_MINOR.$PY3_PATCH/Python-$PY3_MAJOR.$PY3_MINOR.$PY3_PATCH.tar.xz
 URL_READLINE=$URL_GNU_MIRROR/readline/readline-8.1.tar.gz
 URL_XZUTILS=https://tukaani.org/xz/xz-5.2.5.tar.xz
