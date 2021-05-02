@@ -16,23 +16,20 @@ get_source $URL_PYTHON
 
 ( # Apply any patches if present.
 
-  shopt -s nullglob
+  shopt -s nullglob  # to not break loop code if no patches present
   for patch in $SELF_DIR/*.patch; do
     patch -p1 < $patch
   done
 )
 
 (
-  unset MAKEFLAGS    # revoke multi-core compilation
-  export CFLAGS="\
-    $CFLAGS \
-    -I$SDKROOT/System/Library/Frameworks/Tk.framework/Versions/Current/Headers\
-  "
+  unset MAKEFLAGS  # Python does not like being built in parallel with '-jN'
+
   configure_make_makeinstall "\
     --enable-framework=$FRA_DIR\
     --with-openssl=$WRK_DIR\
+    --with-tcltk-includes=$SDKROOT/usr/include\
+    --with-tcltk-libs=$SDKROOT/usr/lib\
     --enable-optimizations\
     " "" "PYTHONAPPSDIR=$TMP_DIR"
-
-  # speedup for testing purposes: remove '--enable-optimizations'
 )
