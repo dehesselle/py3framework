@@ -1,4 +1,8 @@
-# relocatable `Python.framework`
+# This project has been archived.
+
+It has been superseded by [https://gitlab.com/dehesselle/python_macos](https://gitlab.com/dehesselle/python_macos).
+
+## relocatable `Python.framework`
 
 ## Motivation
 
